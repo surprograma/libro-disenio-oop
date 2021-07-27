@@ -5,13 +5,14 @@ const darkCodeTheme = require('prism-react-renderer/themes/dracula');
 module.exports = {
   title: 'Diseño de software orientado a objetos',
   tagline: 'Dinosaurs are cool',
-  url: 'https://surprograma.github.io/disenio-oop',
+  url: 'https://surprograma.github.io/libro-disenio-oop',
   baseUrl: '/',
   onBrokenLinks: 'throw',
   onBrokenMarkdownLinks: 'warn',
   favicon: 'img/favicon.ico',
   organizationName: 'surprograma',
-  projectName: 'disenio-oop',
+  projectName: 'libro-disenio-oop',
+  trailingSlash: false,
   themeConfig: {
     navbar: {
       title: 'Diseño de software orientado a objetos',
@@ -28,7 +29,7 @@ module.exports = {
         },
         {to: '/blog', label: 'Blog', position: 'left'},
         {
-          href: 'https://github.com/surprograma/disenio-oop',
+          href: 'https://github.com/surprograma/libro-disenio-oop',
           label: 'GitHub',
           position: 'right',
         },
@@ -92,13 +93,13 @@ module.exports = {
           sidebarPath: require.resolve('./sidebars.js'),
           // Please change this to your repo.
           editUrl:
-            'https://github.com/surprograma/disenio-oop/edit/main/',
+            'https://github.com/surprograma/libro-disenio-oop/edit/main/',
         },
         blog: {
           showReadingTime: true,
           // Please change this to your repo.
           editUrl:
-            'https://github.com/surprograma/disenio-oop/edit/main/blog/',
+            'https://github.com/surprograma/libro-disenio-oop/edit/main/blog/',
         },
         theme: {
           customCss: require.resolve('./src/css/custom.css'),
