@@ -6,7 +6,7 @@ module.exports = {
   title: 'Diseño de software orientado a objetos',
   tagline: 'Dinosaurs are cool',
   url: 'https://surprograma.github.io/libro-disenio-oop',
-  baseUrl: '/',
+  baseUrl: '/libro-disenio-oop/',
   onBrokenLinks: 'throw',
   onBrokenMarkdownLinks: 'warn',
   favicon: 'img/favicon.ico',
