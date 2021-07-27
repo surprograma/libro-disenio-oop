@@ -5,7 +5,7 @@ const darkCodeTheme = require('prism-react-renderer/themes/dracula');
 module.exports = {
   title: 'Diseño de software orientado a objetos',
   tagline: 'Dinosaurs are cool',
-  url: 'https://surprograma.github.io/libro-disenio-oop',
+  url: 'https://surprograma.github.io/',
   baseUrl: '/libro-disenio-oop/',
   onBrokenLinks: 'throw',
   onBrokenMarkdownLinks: 'warn',
