@@ -12,7 +12,7 @@ module.exports = {
   favicon: 'img/favicon.ico',
   organizationName: 'surprograma',
   projectName: 'libro-disenio-oop',
-  trailingSlash: false,
+  trailingSlash: true,
   themeConfig: {
     navbar: {
       title: 'Diseño de software orientado a objetos',
@@ -107,4 +107,13 @@ module.exports = {
       },
     ],
   ],
+  plugins: [
+    [
+      require.resolve('@easyops-cn/docusaurus-search-local'),
+      {
+        hashed: true,
+        language: 'es',
+      },
+    ],
+  ]
 };
