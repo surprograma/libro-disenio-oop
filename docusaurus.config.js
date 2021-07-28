@@ -30,7 +30,7 @@ module.exports = {
         {to: '/blog', label: 'Blog', position: 'left'},
         {
           href: 'https://github.com/surprograma/libro-disenio-oop',
-          label: 'GitHub',
+          label: 'Ver en GitHub',
           position: 'right',
         },
       ],
@@ -48,37 +48,28 @@ module.exports = {
           ],
         },
         {
-          title: 'Community',
+          title: 'Comunidad',
           items: [
             {
-              label: 'Stack Overflow',
-              href: 'https://stackoverflow.com/questions/tagged/docusaurus',
+              label: 'YouTube',
+              href: 'https://youtube.com/c/elsurtambienprograma',
             },
             {
               label: 'Discord',
-              href: 'https://discordapp.com/invite/docusaurus',
+              href: 'https://discord.gg/qwAgfDx3tX',
             },
             {
-              label: 'Twitter',
-              href: 'https://twitter.com/docusaurus',
-            },
-          ],
-        },
-        {
-          title: 'More',
-          items: [
-            {
-              label: 'Blog',
-              to: '/blog',
+              label: 'Telegram',
+              href: 'https://t.me/surprograma',
             },
             {
-              label: 'GitHub',
-              href: 'https://github.com/facebook/docusaurus',
+              label: 'Instagram',
+              href: 'https://instagram.com/surprograma',
             },
           ],
         },
       ],
-      copyright: `Copyright © ${new Date().getFullYear()} My Project, Inc. Built with Docusaurus.`,
+      copyright: `<p>Todo el contenido de este sitio se publica bajo una licencia <a href="https://creativecommons.org/licenses/by-sa/4.0/deed.es">CC BY-SA 4.0</a></p><p>Algunos derechos reservados. © ${new Date().getFullYear()} El Sur También programa.</p>`,
     },
     prism: {
       theme: lightCodeTheme,
