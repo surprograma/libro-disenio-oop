@@ -91,13 +91,13 @@ module.exports = {
       {
         docs: {
           sidebarPath: require.resolve('./sidebars.js'),
-          // Please change this to your repo.
           editUrl:
             'https://github.com/surprograma/libro-disenio-oop/edit/main/',
+          showLastUpdateAuthor: true,
+          showLastUpdateTime: true
         },
         blog: {
           showReadingTime: true,
-          // Please change this to your repo.
           editUrl:
             'https://github.com/surprograma/libro-disenio-oop/edit/main/blog/',
         },
