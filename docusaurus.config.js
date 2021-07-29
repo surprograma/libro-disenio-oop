@@ -4,7 +4,6 @@ const darkCodeTheme = require('prism-react-renderer/themes/dracula');
 /** @type {import('@docusaurus/types').DocusaurusConfig} */
 module.exports = {
   title: 'Diseño de software orientado a objetos',
-  tagline: 'Dinosaurs are cool',
   url: 'https://surprograma.github.io/',
   baseUrl: '/libro-disenio-oop/',
   onBrokenLinks: 'throw',
@@ -25,9 +24,8 @@ module.exports = {
           type: 'doc',
           docId: 'intro',
           position: 'left',
-          label: 'Tutorial',
+          label: 'Material',
         },
-        {to: '/blog', label: 'Blog', position: 'left'},
         {
           href: 'https://github.com/surprograma/libro-disenio-oop',
           label: 'Ver en GitHub',

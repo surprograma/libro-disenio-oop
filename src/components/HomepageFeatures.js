@@ -4,32 +4,33 @@ import styles from './HomepageFeatures.module.css';
 
 const FeatureList = [
   {
-    title: 'Easy to Use',
-    Svg: require('../../static/img/undraw_docusaurus_mountain.svg').default,
+    // Ver dónde poner esto...
+    // <div>Icons made by <a href="https://www.freepik.com" title="Freepik">Freepik</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></div>
+    title: 'Enfocado en los conceptos',
+    Svg: require('../../static/img/mind-map.svg').default,
     description: (
       <>
-        Docusaurus was designed from the ground up to be easily installed and
-        used to get your website up and running quickly.
+        Aunque usamos Kotlin y TypeScript como tecnologías principales, los utilizamos solamente como medio para explicar lo conceptual. Lo que aprendas acá podrás extrapolarlo a cualquier lenguaje orientado a objetos.
       </>
     ),
   },
   {
-    title: 'Focus on What Matters',
-    Svg: require('../../static/img/undraw_docusaurus_tree.svg').default,
+    // Ver dónde poner esto...
+    // <div>Icons made by <a href="https://www.flaticon.com/authors/creaticca-creative-agency" title="Creaticca Creative Agency">Creaticca Creative Agency</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></div>
+    title: 'En nuestro idioma',
+    Svg: require('../../static/img/sudamerica.svg').default,
     description: (
       <>
-        Docusaurus lets you focus on your docs, and we&apos;ll do the chores. Go
-        ahead and move your docs into the <code>docs</code> directory.
+        Encontrar material de calidad en español es difícil, y más aún es encontrar algo producido en nuestro continente. Sin pretender excluir a nadie, nos esforzamos por que los ejemplos y ejercicios traten de temas cotidianos para habitantes de Latinoamérica. 
       </>
     ),
   },
   {
-    title: 'Powered by React',
-    Svg: require('../../static/img/undraw_docusaurus_react.svg').default,
+    title: 'Contenido libre',
+    Svg: require('../../static/img/cc.svg').default,
     description: (
       <>
-        Extend or customize your website layout by reusing React. Docusaurus can
-        be extended while reusing the same header and footer.
+        Todo el contenido de este sitio se publica bajo una licencia <a href="https://creativecommons.org/licenses/by-sa/4.0/deed.es">CC BY-SA 4.0</a>, lo cual implica que podés compartirlo con quien quieras y adaptarlo para usar en otro lado (respetando los términos de la licencia).
       </>
     ),
   },
