@@ -14,7 +14,7 @@ module.exports = {
   trailingSlash: true,
   i18n: {
     defaultLocale: 'es',
-    locales: ['es']
+    locales: ['es'],
   },
   themeConfig: {
     navbar: {
@@ -79,7 +79,7 @@ module.exports = {
           editUrl:
             'https://github.com/surprograma/libro-disenio-oop/edit/main/',
           showLastUpdateAuthor: true,
-          showLastUpdateTime: true
+          showLastUpdateTime: true,
         },
         blog: {
           showReadingTime: true,
@@ -98,7 +98,18 @@ module.exports = {
       {
         hashed: true,
         language: 'es',
+        searchResultContextMaxLength: 100,
+        translations: {
+          search_placeholder: 'Buscar',
+          see_all_results: 'Ver todos los resultados',
+          no_results: 'No hay resultados. 😞',
+          search_results_for: 'Buscar resultados para "{{ keyword }}"',
+          search_the_documentation: 'Buscar en la documentación',
+          count_documents_found: '{{ count }} documento encontrado',
+          count_documents_found_plural: '{{ count }} documentos encontrados',
+          no_documents_were_found: 'No encontramos nada que coincida con tu búsqueda... 😢',
+        },
       },
     ],
-  ]
+  ],
 };
