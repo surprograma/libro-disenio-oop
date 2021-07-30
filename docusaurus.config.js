@@ -14,10 +14,10 @@ module.exports = {
   trailingSlash: true,
   themeConfig: {
     navbar: {
-      title: 'Diseño de software orientado a objetos',
+      title: 'Diseño de software',
       logo: {
-        alt: 'My Site Logo',
-        src: 'img/logo.svg',
+        alt: 'Logo',
+        src: 'img/logo.png',
       },
       items: [
         {
@@ -58,7 +58,7 @@ module.exports = {
           ],
         },
       ],
-      copyright: `<p>Todo el contenido de este sitio se publica bajo una licencia <a href="https://creativecommons.org/licenses/by-sa/4.0/deed.es">CC BY-SA 4.0</a></p><p>Algunos derechos reservados. © ${new Date().getFullYear()} El Sur También programa.</p>`,
+      copyright: `<img src="/static/img/logo.png" width="70px" /><p style="margin-bottom: 0">Todo el contenido de este sitio se publica bajo una licencia <a href="https://creativecommons.org/licenses/by-sa/4.0/deed.es">CC BY-SA 4.0</a></p><p>Algunos derechos reservados. © ${new Date().getFullYear()} El Sur También programa.</p>`,
     },
     prism: {
       theme: lightCodeTheme,
