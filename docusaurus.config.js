@@ -12,6 +12,10 @@ module.exports = {
   organizationName: 'surprograma',
   projectName: 'libro-disenio-oop',
   trailingSlash: true,
+  i18n: {
+    defaultLocale: 'es',
+    locales: ['es']
+  },
   themeConfig: {
     navbar: {
       title: 'Diseño de software',
