@@ -12,7 +12,7 @@ Con `LocalDate` podemos representar una fecha, y con `LocalDateTime` una fecha y
 
 A continuación, un ejemplo utilizando `LocalDate`:
 
-``` kotlin
+```kotlin
 import java.time.LocalDate
 
 // Instancia de LocalDate con los valores de la fecha actual del sistema.

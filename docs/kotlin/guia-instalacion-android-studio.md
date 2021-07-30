@@ -15,6 +15,7 @@ Ahí el sitio autodetectará la descarga más adecuada según su sistema operati
 
 - En Windows & macOS, seguir las instrucciones del instalador.
 - En Linux, descargará un .zip que deberemos descomprimir en un directorio. Luego, desde una terminal situada en ese directorio haremos:
+
 ```bash
 cd bin/ # nos movemos al subdirectorio bin/
 ./studio.sh # ejecutamos el script para lanzar el IDE

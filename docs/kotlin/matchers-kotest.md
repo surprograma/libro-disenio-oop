@@ -15,6 +15,7 @@ Para ver otros métodos, recomendamos leer [la documentación](https://kotest.io
 `objeto.shouldBe(otro)`
 
 Matchers relacionados:
+
 - `shouldNotBe` (diferente)
 - `shouldBeGreaterThan` (mayor a)
 - `shouldBeLessThanOrEqual` (menor o igual a)
@@ -49,7 +50,7 @@ En vez de `booleano.shouldBe(true)` podemos escribir simplemente `booleano.shoul
 
 En este caso no importa el orden (por ejemplo, `elemento2` podría estar antes que `elemento1` en la lista y esto no daría error).
 
-:eyes: **Ojo:** este matcher no dice nada sobre los demás elementos de la colección, y en algunos casos necesitamos verificar que no haya otros elementos. En ese caso, deberíamos usar alguno de los matchers que vienen a continuación. 
+:eyes: **Ojo:** este matcher no dice nada sobre los demás elementos de la colección, y en algunos casos necesitamos verificar que no haya otros elementos. En ese caso, deberíamos usar alguno de los matchers que vienen a continuación.
 
 ### Si la colección tiene exactamente un grupo de elementos (y ninguno más)
 
@@ -69,7 +70,7 @@ unaLista.shouldContainExactlyInAnyOrder(elemento1, elemento2, elemento3)
 unaLista.shouldContainExactlyInAnyOrder(otraLista)
 ```
 
-### Si la colección no tiene duplicados 
+### Si la colección no tiene duplicados
 
 `coleccion.shouldBeUnique()`
 

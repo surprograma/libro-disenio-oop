@@ -11,8 +11,9 @@ Cómo se menciona en el titulo, esta guía busca dar un primer acercamiento haci
 La primera gran diferencia es que Kotlin es un lenguaje con _tipado estático_ mientras que Wollok tenía _tipado dinámico_. Esto implica que la responsabilidad de escribir los tipos pasa a ser de quien programa.
 
 Afortunadamente Kotlin _infiere_ la mayoría de los tipos, siendo necesario escribirlos en pocos casos:
-* _parámetros_, tanto de los métodos como del constructor de una clase;
-* _atributos_ cuyo valor no se inicialize al definirlo.
+
+- _parámetros_, tanto de los métodos como del constructor de una clase;
+- _atributos_ cuyo valor no se inicialize al definirlo.
 
 Veamos un ejemplo de definiciones equivalentes en `Wollok` y `Kotlin`:
 
@@ -62,9 +63,10 @@ class Ave(var energia: Int, val direccion: String) {
 ```
 
 Algunas diferencias:
-* lo que en Wollok era `const`, en Kotlin es `val`. En ambos `var` significa lo mismo,
-* el `method` de Wollok es `fun` en Kotlin, y el `self` es `this`,
-* en Kotlin, los atributos se escriben como si fueran parámetros de la clase.
+
+- lo que en Wollok era `const`, en Kotlin es `val`. En ambos `var` significa lo mismo,
+- el `method` de Wollok es `fun` en Kotlin, y el `self` es `this`,
+- en Kotlin, los atributos se escriben como si fueran parámetros de la clase.
 
 ## Instanciación de objetos
 
@@ -85,8 +87,9 @@ val pepita = Ave(5, "Wallaby 42, Sidney")
 ```
 
 Algunas diferencias:
-* en Kotlin, no se escribe el `new`;
-* en Kotlin, no es necesario poner los nombres de los atributos.
+
+- en Kotlin, no se escribe el `new`;
+- en Kotlin, no es necesario poner los nombres de los atributos.
 
 ## Objetos autodefinidos
 
@@ -136,6 +139,7 @@ fun alimentar(alimento: Alimento) {
   energia += alimento.energia
 }
 ```
+
 > `Ave` admite cualquier objeto que implemente la interfaz `Alimento`
 
 ## Colecciones
@@ -186,6 +190,7 @@ Cualquiera de las dos formas es válida.
 Un muy pequeño resumen de las operaciones más comunes. Una lista extensísima de todos los métodos que existen se pueden ver en [la documentación oficial de `Collection`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-collection/).
 
 #### Básicas
+
 - `size` devuelve el tamaño de la colección. Ojo que es un atributo y no un método, por eso va sin parentesis.
 - `isEmpty()` pregunta si la colección está vacía.
 - `last()` devuelve el último elemento.
@@ -193,6 +198,7 @@ Un muy pequeño resumen de las operaciones más comunes. Una lista extensísima 
 - `contains(elemento)` verifica si la colección contiene a un cierto elemento.
 
 #### Orden superior
+
 - `any { condición }` pregunta si algún elemento de la colección cumple una condición.
 - `all { condición }` pregunta si todos los elementos de la colección cumplen una condición.
 - `find { condición }` devuelve el primer elemento que cumpla con la condición.
@@ -202,19 +208,23 @@ Un muy pequeño resumen de las operaciones más comunes. Una lista extensísima 
 Están también los clásicos `map`, `filter`, `reduce` y muchísimos métodos más.
 
 #### Exclusivos para colecciones de números
+
 - `max()` devuelve el valor máximo.
 - `min()` devuelve el valor mínimo.
 - `sum()` devuelve la suma de los elementos.
 
 #### Exclusivos para colecciones mutables
+
 - `clear()` borra todos los elementos de la colección.
 - `add(elemento)` agrega el elemento a la colección.
 - `remove(elemento)` borra el elemento de la colección.
 
 #### Exclusivos para listas
+
 - `toSet()` devuelve un conjunto con los elementos _únicos_ de la lista. O dicho de otra manera: los elementos que tenía la lista, omitiendo repetidos.
 
 #### Exclusivos para conjuntos
+
 - `toList()` devuelve una lista con los mismos elementos que tenga el conjunto.
 
 ## Manejo de errores

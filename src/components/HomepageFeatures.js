@@ -10,7 +10,10 @@ const FeatureList = [
     Svg: require('../../static/img/mind-map.svg').default,
     description: (
       <>
-        Aunque usamos Kotlin y TypeScript como tecnologías principales, los utilizamos solamente como medio para explicar lo conceptual. Lo que aprendas acá podrás extrapolarlo a cualquier lenguaje orientado a objetos.
+        Aunque usamos Kotlin y TypeScript como tecnologías principales, los
+        utilizamos solamente como medio para explicar lo conceptual. Lo que
+        aprendas acá podrás extrapolarlo a cualquier lenguaje orientado a
+        objetos.
       </>
     ),
   },
@@ -21,7 +24,10 @@ const FeatureList = [
     Svg: require('../../static/img/sudamerica.svg').default,
     description: (
       <>
-        Encontrar material de calidad en español es difícil, y más aún es encontrar algo producido en nuestro continente. Sin pretender excluir a nadie, nos esforzamos por que los ejemplos y ejercicios traten de temas cotidianos para habitantes de Latinoamérica. 
+        Encontrar material de calidad en español es difícil, y más aún es
+        encontrar algo producido en nuestro continente. Sin pretender excluir a
+        nadie, nos esforzamos por que los ejemplos y ejercicios traten de temas
+        cotidianos para habitantes de Latinoamérica.
       </>
     ),
   },
@@ -30,13 +36,18 @@ const FeatureList = [
     Svg: require('../../static/img/cc.svg').default,
     description: (
       <>
-        Todo el contenido de este sitio se publica bajo una licencia <a href="https://creativecommons.org/licenses/by-sa/4.0/deed.es">CC BY-SA 4.0</a>, lo cual implica que podés compartirlo con quien quieras y adaptarlo para usar en otro lado (respetando los términos de la licencia).
+        Todo el contenido de este sitio se publica bajo una licencia{' '}
+        <a href="https://creativecommons.org/licenses/by-sa/4.0/deed.es">
+          CC BY-SA 4.0
+        </a>
+        , lo cual implica que podés compartirlo con quien quieras y adaptarlo
+        para usar en otro lado (respetando los términos de la licencia).
       </>
     ),
   },
 ];
 
-function Feature({Svg, title, description}) {
+function Feature({ Svg, title, description }) {
   return (
     <div className={clsx('col col--4')}>
       <div className="text--center">
