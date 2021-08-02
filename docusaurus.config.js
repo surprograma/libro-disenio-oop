@@ -1,11 +1,13 @@
 const lightCodeTheme = require('prism-react-renderer/themes/github');
 const darkCodeTheme = require('prism-react-renderer/themes/dracula');
 
+const baseUrl = '/libro-disenio-oop/';
+
 /** @type {import('@docusaurus/types').DocusaurusConfig} */
 module.exports = {
   title: 'Diseño de software orientado a objetos',
   url: 'https://surprograma.github.io/',
-  baseUrl: '/libro-disenio-oop/',
+  baseUrl,
   onBrokenLinks: 'throw',
   onBrokenMarkdownLinks: 'warn',
   favicon: 'img/favicon.ico',
@@ -62,7 +64,7 @@ module.exports = {
           ],
         },
       ],
-      copyright: `<img src="/static/img/logo.png" width="70px" /><p style="margin-bottom: 0">Todo el contenido de este sitio se publica bajo una licencia <a href="https://creativecommons.org/licenses/by-sa/4.0/deed.es">CC BY-SA 4.0</a></p><p>Algunos derechos reservados. © ${new Date().getFullYear()} El Sur También programa.</p>`,
+      copyright: `<img src="${baseUrl}img/logo.png" width="70px" /><p style="margin-bottom: 0">Todo el contenido de este sitio se publica bajo una licencia <a href="https://creativecommons.org/licenses/by-sa/4.0/deed.es">CC BY-SA 4.0</a></p><p>Algunos derechos reservados. © ${new Date().getFullYear()} El Sur También programa.</p>`,
     },
     prism: {
       theme: lightCodeTheme,
@@ -107,7 +109,8 @@ module.exports = {
           search_the_documentation: 'Buscar en la documentación',
           count_documents_found: '{{ count }} documento encontrado',
           count_documents_found_plural: '{{ count }} documentos encontrados',
-          no_documents_were_found: 'No encontramos nada que coincida con tu búsqueda... 😢',
+          no_documents_were_found:
+            'No encontramos nada que coincida con tu búsqueda... 😢',
         },
       },
     ],
