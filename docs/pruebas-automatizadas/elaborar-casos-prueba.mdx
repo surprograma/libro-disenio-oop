@@ -1,0 +1,364 @@
+---
+sidebar_position: 1
+title: ¿Cómo elaborar casos de prueba?
+---
+
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
+export const Codigo = ({ children }) => children;
+
+export const KotlinTypescript = ({ children, color }) => (
+  <Tabs
+    groupId="lenguaje-oop"
+    defaultValue="kt"
+    values={[
+      { label: 'Kotlin', value: 'kt' },
+      { label: 'TypeScript', value: 'ts' },
+    ]}
+  >
+    <TabItem value="kt">{children[0]}</TabItem>
+    <TabItem value="ts">{children[1]}</TabItem>
+  </Tabs>
+);
+
+Este artículo presenta algunas guías para desarrollar los casos de prueba, asumiendo que ya conocés el concepto de pruebas automatizadas y algún framework para implementarlas.
+
+## Descripción del dominio
+
+Todo el apunte estará elaborado en base al siguiente dominio:
+
+:::note requerimiento
+
+Una ferretería tiene en cuenta ciertos aspectos para decidir si le puede fiar a un cliente o no.
+
+- Al cliente particular le fia solo si no adeuda nada, es decir si su deuda es de $0.
+- A las constructoras les fia dependiendo de cuántos albañiles trabajen en la obra:
+  - si son 5 o más albañiles, le fía hasta $10.000,
+  - de lo contrario sólo hasta $5.000.
+
+:::
+
+## Definiendo los escenarios
+
+Para armar los escenarios de prueba, vamos a tomar prestado un concepto de la matemática llamado **[clase de equivalencia](https://es.wikipedia.org/wiki/Clase_de_equivalencia)**. Clasificar a los distintos escenarios según las características que comparten nos va a permitir contemplar todas las opciones posibles sin tener que escribir infinitas pruebas.
+
+Para un **cliente particular** tenemos dos casos: que deba algo o que no deba nada. Si debe $1 ó $50.000 no nos importa, porque está en la misma clase de equivalencia (la deuda es mayor a $0).
+
+Para una **empresa constructora**, tenemos más variantes:
+
+- si tiene **menos de 5** albañiles, podemos decir que son `"pocos"` albañiles,
+- si tiene **5 o más** albañiles, podemos decir que son `"muchos"` albañiles.
+
+Combinando eso con las posibles deudas, podríamos definir los siguientes escenarios:
+
+- Dado un cliente particular:
+  - **Si debe algo:** no se le puede fiar.
+  - **Si no debe nada:** se le puede fiar.
+- Dada una constructora con muchos (5) albañiles:
+  - **Si la obra debe más de $10.000:** no se le puede fiar.
+  - **Si la obra debe menos de $10.000:** se le puede fiar.
+- Dada una constructora con pocos (4) albañiles:
+  - **Si la obra debe más de $5.000:** no se le puede fiar.
+  - **Si la obra debe menos de $5.000:** se le puede fiar.
+
+En el caso de la constructora, elegimos la cantidad de obreros en base al **valor límite**: como 5 es el número que distingue entre _pocos_ y _muchos_, elegimos 4 para representar al caso _pocos_ y 5 para el caso _muchos_.
+
+Sin dudas podríamos haber elegido otros números, pero es importante que los tests sean simples y fáciles de comprender. Por esta razón, vamos a preferir siempre utilizar valores que nos resulten fáciles de razonar para representar a cada escenario.
+
+## Escribiendo los tests
+
+Necesitamos:
+
+- Un cliente particular.
+- Una empresa constructora con 6 albañiles.
+- Otra empresa constructora con 5 albañiles.
+
+A los que podemos configurar diferentes grados de deuda.
+
+:::caution Atención
+
+Los ejemplos de código que vienen a continuación asumen que se utiliza Kotest (en el caso de Kotlin) o Jest (en el caso de Typescript). La agrupación que proponemos no puede imitarse fácilmente en frameworks como JUnit.
+
+:::
+
+### ¿Cómo agrupar los escenarios?
+
+En frameworks como [Jest](https://jestjs.io/) o [Kotest](https://kotest.io/) tenemos la posibilidad de jerarquizar nuestras pruebas, utilizando las funciones `describe` e `it` para crear estas agrupaciones.
+
+Podríamos también tener todo junto, sin ningún tipo de agrupamiento. Pero esto no resulta ser una buena práctica, porque
+
+- dificulta diferenciar los escenarios: estarán todas las variables de los tests mezcladas,
+- si construimos un fixture con cada uno de los tipos de cliente, estamos penalizando a cada uno de los tests por lo que necesitan los demás: ¿tiene sentido crear una constructora con 5 albañiles si estoy testeando una que tiene 6?,
+- se pierde **cohesión**: un solo método (o función, en este caso) está cubriendo todos los casos de prueba.
+
+Volviendo al ejemplo, hay varias opciones posibles:
+
+- hacer un `describe` para clientes particulares y otro para constructoras,
+- hacer un `describe` para clientes particulares, otro para constructoras con pocos albañiles y otro para constructoras con muchos albañiles.
+
+Elegiremos la ultima opción y agruparemos las pruebas de la siguiente forma:
+
+<KotlinTypescript>
+  <Codigo>
+
+```kotlin
+describe("Un cliente particular") {
+  // ...
+}
+
+describe("Una constructora con pocos albañiles") {
+  // ...
+}
+
+describe("Una constructora con muchos albañiles") {
+  // ...
+}
+```
+
+  </Codigo>
+  <Codigo>
+
+```typescript
+describe('Un cliente particular', () => {
+  // ...
+});
+
+describe('Una constructora con pocos albañiles', () => {
+  // ...
+});
+
+describe('Una constructora con muchos albañiles', () => {
+  // ...
+});
+```
+
+  </Codigo>
+</KotlinTypescript>
+
+Es importante que no haya demasiados detalles de implementación en los nombres: `Una constructora con 5 albañiles` o `Una constructora con 10 albañiles` están sujetos a que cualquier cambio del negocio respecto a lo que son “muchos” o “pocos” albañiles necesite modificar el nombre del test. Además, para comprender que se trata de casos diferentes tenemos que
+
+### Expresividad: nombres acorde a lo que representan
+
+Al empezar a diseñar los casos de prueba es usual imaginar algún ejemplo más o menos realista, como `La Constructora Hurlingham tiene 5 albañiles y una deuda de 7000 pesos`.
+
+Intentando traducir esto a código, tal vez nos saldría un tests como el siguiente:
+
+<KotlinTypescript>
+  <Codigo>
+
+```kotlin
+class FerreteriaTest : DescribeSpec({
+  describe("Una ferretería") {
+    it("puede fiarle a la Constructora Hurlingham") {
+      val constructoraHurlingham = EmpresaConstructora(albaniles = 5, deuda = 7000)
+      constructoraHurlingham.puedePedirFiado().shouldBeTrue()
+    }
+  }
+})
+```
+
+  </Codigo>
+  <Codigo>
+
+```typescript
+describe('Una ferretería', () => {
+  it('puede fiarle a la Constructora Hurlingham', () => {
+    const constructoraHurlingham = new EmpresaConstructora(5, 7000);
+    expect(constructoraHurlingham.puedePedirFiado()).toBeTruthy();
+  });
+});
+```
+
+  </Codigo>
+</KotlinTypescript>
+
+Pero ¿qué pasa si hay un error en el código y el test falla? Supongamos esta implementación, donde la clase `EmpresaConstructora` tiene la definición de la deuda como un entero:
+
+<KotlinTypescript>
+  <Codigo>
+
+```kotlin
+class EmpresaConstructora(val cantidadAlbaniles: Int, deuda: Int): Cliente(deuda) {
+    // Debería ser >= 5
+    fun montoMaximoDeuda() = if (cantidadAlbaniles > 5) 10000 else 5000
+
+    override fun puedePedirFiado() = deuda <= this.montoMaximoDeuda()
+}
+```
+
+  </Codigo>
+  <Codigo>
+
+```typescript
+class EmpresaConstructora extends Cliente {
+  constructor(public cantidadAlbaniles: number, deuda: number) {
+    super(deuda);
+  }
+
+  montoMaximoDeuda(): number {
+    // Debería ser >= 5
+    return this.cantidadAlbaniles > 5 ? 10000 : 5000;
+  }
+
+  puedePedirFiado(): boolean {
+    return this.deuda <= this.montoMaximoDeuda();
+  }
+}
+```
+
+  </Codigo>
+</KotlinTypescript>
+
+![Caso triste](/img/docs/elaborar-casos-prueba/test-poco-expresivo.png)
+
+Cuando ejecutamos el test tenemos muy poca información relevante:
+
+- la constante `constructorHurlingham` no está revelando que es una constructora con muchos albañiles,
+- y tampoco está claro por qué no puede pedir fiado.
+
+Al fallar, tenemos que bucear en el código y extraer este dato para determinar si el error está en el test o en el código de negocio.
+
+#### Otra oportunidad
+
+Vamos a mejorar la semántica del test, renombrando la constante `constructoraHurlingham` por un nombre más representativo de la clase de equivalencia que estamos modelando y cambiando el nombre del test:
+
+<KotlinTypescript>
+  <Codigo>
+
+```kotlin
+class FerreteriaTest : DescribeSpec({
+  describe("Una ferretería") {
+    it("puede fiarle a una constructora con muchos albañiles") {
+      val constructoraMuchosAlbaniles = EmpresaConstructora(albaniles = 5, deuda = 7000)
+      constructoraMuchosAlbaniles.puedePedirFiado().shouldBeTrue()
+    }
+  }
+})
+```
+
+  </Codigo>
+  <Codigo>
+
+```typescript
+describe('Una ferretería', () => {
+  it('puede fiarle a una constructora con muchos albañiles', () => {
+    const constructoraMuchosAlbaniles = new EmpresaConstructora(5, 7000);
+    expect(constructoraMuchosAlbaniles.puedePedirFiado()).toBeTruthy();
+  });
+});
+```
+
+  </Codigo>
+</KotlinTypescript>
+
+![Caso feliz](/img/docs/elaborar-casos-prueba/test-expresivo.png)
+
+Ahora al fallar el test sabemos más cosas:
+
+- qué es lo que estamos testeando, tratando de no entrar en detalles para no duplicar lo que dice el código,
+- qué se esperaba que pasara y no pasó, en un formato _más o menos_ legible para un usuario: “Una ferretería puede fiarle a una constructora con muchos albañiles”.
+
+<!-- # Pasando a un ejemplo práctico:
+
+En un nuevo archivo llamese `clientesTest.kt`, con un nombre que evidencia la clase que se va a testear más no lo que se está testeando **Ej**: `clienteConstructoraCon5Albaniles.kt`, ya que se pueden testear muchas cosas en un mismo archivo.
+
+Al igual que los desribes e its, elegir nombres para las instancias de los objetos que especifiquen que es lo que testea es sumamente importante.
+
+No es lo mismo: `val miConstructora = EmpresaConstructora(albaniles= 3, deuda = 0)` que ` empresaConstructoraSinDeudas EmpresaConstructora(albaniles= 5, deuda = 7000)`
+
+```kotlin
+class ClientesTest : DescribeSpec({
+  val ferreteria = Ferreteria()
+
+  describe("Puede fiar a clientes") {
+    describe("A un cliente particular") {
+      //Elegir nombres que represente la clase de equivalencia que estamos modelando.
+      val clienteParticular = ClienteParticular(deuda=0)
+      val clienteParticularDeudor = ClienteParticular(deuda=50)
+
+      it("Sin deudas") {
+          ferreteria.puedeFiarA(clienteParticular).shouldBeTrue()
+        }
+
+      it("Que adeuda algo") {
+        ferreteria.puedeFiarA(clienteParticularDeudor).shouldBeFalse()
+      }
+    }
+
+    describe("A una empresa constructora") {
+      val empresaConstructoraChica = EmpresaConstructora(albaniles=4, deuda=5000)
+      val empresaConstructoraGrande = EmpresaConstructora(albaniles=5 deuda=10000)
+
+      describe("Con menos de 5 albañiles") {
+        it("Si adeuda hasta 5.000")
+        ferreteria.puedeFiarA(empresaConstructoraChica).shouldBeTrue()
+
+        it("Si adeuda más de 5.000") {
+          empresaConstructoraChica.generarDeudaPor(1000)
+
+          //Notar que ahora la deuda de la "empresaConstructoraChica" va a ser de 6.000
+          empresaConstructoraChica.deuda.shouldBe(6000)
+
+          ferreteria.puedeFiarA(empresaConstructoraChica).shouldBeFalse()
+        }
+      }
+
+      describe("Con 5 albañiles") {
+        it("Si adeuda hasta 10.000") {
+          ferreteria.puedeFiarA(empresaConstructoraGrande).shouldBeTrue()
+        }
+
+        it("Si adeuda más de 10.000") {
+          empresaConstructoraGrande.generarDeudaPor(1000)
+
+          //Notar que ahora la deuda de la "empresaConstructoraGrande" va a ser de 6.000
+          empresaConstructoraGrande.deuda.shouldBe(11000)
+
+          ferreteria.puedeFiarA(empresaConstructoraGrande).shouldBeFalse()
+        }
+      }
+    }
+  }
+``` -->
+
+<!-- ## AAA Pattern
+
+Los tests suelen estructurarse según el patrón AAA: Arrange, Act y Assert.
+
+- **Arrange**: Que podría traducirse, cómo arreglar o gestionar, en dónde se instancian los objetos a testear(la Ferreteria y los Clientes). Cuando los contextos son compartidos, los frameworks basados en xUnit (JUnit5 es uno de ellos) nos permiten ubicarlo en un método setup (@BeforeEach). La desventaja de esta técnica es que para tener una idea general de los elementos que participan en el test debemos mirar el test y el setup, por eso una alternativa suele ser tener métodos en el test que construyen el escenario que se necesita:
+
+- **Act**: Son las operaciones que tienen efecto. por ejemplo el método del cliente `generarDeudaPor(cantidad)`. Hay tests que quizás no necesiten disparar acciones, y está bien que eso ocurra.
+
+- **Assert**: Lo que esperamos que pase, generalmente asociado a las respuestas que da el envío de un mensaje al objeto testeado.
+
+## One assert per test
+
+Hay ciertas controversias respecto a si podemos tener varios asserts en el mismo test, ya que cuando el primer assert falla los siguientes no se siguen evaluando: esto en realidad depende del runner de xUnit, podríamos eventualmente trabajar con un framework que continue buscando asserts y discrimine cuáles anduvieron y cuáles no (RSpec, framework de testeo para Ruby, hace ésto).
+
+Por lo que nuestro consejo es: Los tests deben fallar por exactamente un solo motivo, esto relaja esa restricción.
+En resúmen lo importante no es tener un solo `assert`, sino que todos los `asserts` estén relacionados con la misma funcionalidad.
+
+```kotlin
+describe("Nuestros empleados"){
+  it("Obtener correctamente nuestros Empleados") {
+    val albaniles =  mutableListOf("Bruno", "Ricardo", "Damián")
+    albaniles.size.shouldBe(3)
+    albaniles.get(0).shouldBe("Bruno")
+    albaniles.get(1).shouldBe("Ricardo")
+    albaniles.get(2).shouldBe("Damián")
+  }
+}
+``` -->
+
+<!-- ## Resúmen
+
+- Armá escenarios que definan las clases de tests.
+- Definí los `describe` e `it` según corresopnda para cada test, de manera de entender qué estamos testeando. El cómo lo terminás de ver en el código, evitá duplicidades entre el texto que explica y el código escrito.
+- Evitá que un `describe` tenga muchos escenarios juntos, es más difícil seguirlos.
+- Los nombres de las variables deben reflejar la clase de equivalencia que están resolviendo, y no casos particulares (sí empresaConstructoraChica, no empresita o miEmpresa).
+- Los tests se suelen estructurar utilizando las tres A: Arrange (el setup que conviene mantenerlo simple), Act (operaciones con efecto cuando corresponde) y Assert (las aserciones que pueden ser más de una por cada test, pero deben testear el mismo concepto). -->
+
+## Créditos
+
+Este apunte es una adaptación de [Testeo unitario avanzado](http://wiki.uqbar.org/wiki/articles/testeo-unitario-avanzado.html), elaborado por Fernando Dodino para la [Fundación Uqbar](https://www.uqbar.org/#/).
