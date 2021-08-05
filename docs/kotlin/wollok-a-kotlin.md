@@ -1,10 +1,16 @@
 ---
 sidebar_position: 1
+title: De Wollok a Kotlin
+description: Pequeño apunte-machete con las diferencias y similitudes entre ambos lenguajes, pensado para acompañar la transición.
 ---
 
-# De Wollok a Kotlin
+Cómo se menciona en el titulo, esta guía busca dar un primer acercamiento hacia el lenguaje Kotlin, comparándolo con [Wollok](https://www.wollok.org/).
 
-Cómo se menciona en el titulo, esta guía busca dar un primer acercamiento hacia el lenguaje Kotlin, comparándolo con Wollok, lenguaje que probablemente recuerden de Objetos 1.
+:::info Sobre Wollok
+
+Según sus creadores, Wollok es un _lenguaje de programación y entorno de desarrollo integrado (IDE) para ser utilizado en el dictado de materias iniciales de programación a objetos_. El proyecto es dirigido por docentes universitarios de Argentina, nucleados en la [Fundación Uqbar](https://www.uqbar.org/#/).
+
+:::
 
 ## Definición de clases
 
