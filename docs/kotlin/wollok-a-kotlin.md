@@ -4,7 +4,7 @@ title: De Wollok a Kotlin
 description: Pequeño apunte-machete con las diferencias y similitudes entre ambos lenguajes, pensado para acompañar la transición.
 ---
 
-Cómo se menciona en el titulo, esta guía busca dar un primer acercamiento hacia el lenguaje Kotlin, comparándolo con [Wollok](https://www.wollok.org/).
+Como se menciona en el titulo, esta guía busca dar un primer acercamiento hacia el lenguaje Kotlin, comparándolo con [Wollok](https://www.wollok.org/).
 
 :::info Sobre Wollok
 
