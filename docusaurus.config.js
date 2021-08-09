@@ -19,6 +19,13 @@ module.exports = {
     locales: ['es'],
   },
   themeConfig: {
+    colorMode: {
+      respectPrefersColorScheme: true,
+      switchConfig: {
+        lightIcon: '☀️',
+        darkIcon: '🌙',
+      },
+    },
     navbar: {
       title: 'Diseño de software',
       logo: {
