@@ -8,7 +8,7 @@ import { VideoYouTube } from '../../src/components/VideoYouTube';
 
 Como se menciona en el titulo, esta guía busca dar un primer acercamiento hacia el lenguaje Kotlin, comparándolo con [Wollok](https://www.wollok.org/).
 
-:::info Sobre Wollok
+:::info
 
 Según sus creadores, Wollok es un _lenguaje de programación y entorno de desarrollo integrado (IDE) para ser utilizado en el dictado de materias iniciales de programación a objetos_. El proyecto es dirigido por docentes universitarios de Argentina, nucleados en la [Fundación Uqbar](https://www.uqbar.org/#/).
 
@@ -115,35 +115,39 @@ Para objetos únicos que tienen que ser conocidos por toda la aplicación, podem
 
 ```kotlin
 object Alpiste {
-  val energia = 1
+  var estaSeco = true
+  fun energiaQueOtorga() = if (estaSeco) { 4 } else { 2 }
 }
 
 object Girasol {
-  val energia = 4
+  fun energiaQueOtorga() = 4
 }
 ```
 
 :::tip
 
-Esto es casi igual que en Wollok, solo que acá escribimos los nombres con Mayúsculas.
+Esto es casi igual que en Wollok, solo que acá escribimos los nombres de los objetos con `MayusculaInicial`.
 
 :::
 
 ## Interfaces
 
-Como Kotlin utiliza tipado estático, si queremos tratar _polimórficamente_ los dos objetos de arriba, necesitamos que tengan un tipo en común. Para esto podemos crear una interfaz, que describe un _contrato_ a cumplir:
+Como Kotlin utiliza tipado estático, si queremos tratar _polimórficamente_ los dos objetos de arriba, necesitamos que tengan un tipo en común.
+
+Podríamos crear una clase abstracta, pero en Kotlin también podemos crear una interfaz, que describe un _contrato_ a cumplir:
 
 ```kotlin
 interface Alimento {
-  val energia: Int
+  fun energia(): Int
 }
 
-object Alpiste : Alimento {
-  override val energia = 1
+object Alpiste: Alimento {
+  var estaSeco = true
+  fun energiaQueOtorga() = if (estaSeco) { 4 } else { 2 }
 }
 
-object Girasol : Alimento {
-  override val energia = 4
+object Girasol: Alimento {
+  fun energiaQueOtorga() = 4
 }
 ```
 
@@ -154,11 +158,11 @@ Luego, en `Ave` ya podemos definir:
 
 ```kotlin
 fun alimentar(alimento: Alimento) {
-  energia += alimento.energia
+  energia += alimento.energiaQueOtorga()
 }
 ```
 
-> `Ave` admite cualquier objeto que implemente la interfaz `Alimento`
+El método `alimentar` admite cualquier objeto que implemente la interfaz `Alimento`.
 
 ## Colecciones
 
@@ -209,41 +213,40 @@ Un muy pequeño resumen de las operaciones más comunes. Una lista extensísima 
 
 #### Básicas
 
-- `size` devuelve el tamaño de la colección. Ojo que es un atributo y no un método, por eso va sin parentesis.
-- `isEmpty()` pregunta si la colección está vacía.
-- `last()` devuelve el último elemento.
-- `first()` devuelve el primer elemento.
-- `contains(elemento)` verifica si la colección contiene a un cierto elemento.
+| Sintaxis             | Comportamiento                                                                             |
+| -------------------- | ------------------------------------------------------------------------------------------ |
+| `size`               | Devuelve el **tamaño** de la colección. Ojo que es un atributo, por eso va sin parentesis. |
+| `isEmpty()`          | Indica si la colección **está vacía**.                                                     |
+| `first()`            | Devuelve el **primer elemento**.                                                           |
+| `last()`             | Devuelve el **último elemento**.                                                           |
+| `contains(elemento)` | Indica si la colección **contiene** a un cierto `elemento`.                                |
 
 #### Orden superior
 
-- `any { condición }` pregunta si algún elemento de la colección cumple una condición.
-- `all { condición }` pregunta si todos los elementos de la colección cumplen una condición.
-- `find { condición }` devuelve el primer elemento que cumpla con la condición.
-- `sumBy { transformación }` devuelve la suma de los elementos, aplicando la `transformación` sobre cada uno de ellos. Ejemplo: `aves.sumBy { it.energia }`. La `transformación` recibe un elemento y debe devolver un número.
-- `minBy { transformación }` devuelve el elemento que resulta menor al aplicar la `transformación`. Notar que devuelve el elemento original y **no** el resultado de la transformación.
+| Sintaxis                         | Comportamiento                                                                                      |
+| -------------------------------- | --------------------------------------------------------------------------------------------------- |
+| `any { condición }`              | Indica si **algún elemento cumple** la `condición` dada.                                            |
+| `all { condición }`              | Indica si **todos los elementos cumplen** la `condición` dada.                                      |
+| `find { condición }`             | Devuelve el **primer elemento que cumpla** con la condición dada.                                   |
+| `sumBy { transformación }`       | Devuelve la **suma de los elementos**, aplicando la `transformación` sobre cada uno de ellos.       |
+| `minByOrNull { transformación }` | Devuelve el **menor elemento** según la `transformación` dada, o `null` si la colección está vacía. |
 
 Están también los clásicos `map`, `filter`, `reduce` y muchísimos métodos más.
 
-#### Exclusivos para colecciones de números
-
-- `max()` devuelve el valor máximo.
-- `min()` devuelve el valor mínimo.
-- `sum()` devuelve la suma de los elementos.
-
 #### Exclusivos para colecciones mutables
 
-- `clear()` borra todos los elementos de la colección.
-- `add(elemento)` agrega el elemento a la colección.
-- `remove(elemento)` borra el elemento de la colección.
+| Sintaxis           | Comportamiento             |
+| ------------------ | -------------------------- |
+| `clear()`          | Borra todos los elementos. |
+| `add(elemento)`    | Agrega el `elemento`.      |
+| `remove(elemento)` | Borra el `elemento`.       |
 
-#### Exclusivos para listas
+#### Transformaciones entre lista y conjunto
 
-- `toSet()` devuelve un conjunto con los elementos _únicos_ de la lista. O dicho de otra manera: los elementos que tenía la lista, omitiendo repetidos.
-
-#### Exclusivos para conjuntos
-
-- `toList()` devuelve una lista con los mismos elementos que tenga el conjunto.
+| Sintaxis            | Comportamiento                                                                                                                              |
+| ------------------- | ------------------------------------------------------------------------------------------------------------------------------------------- |
+| `lista.toSet()`     | Devuelve un conjunto con los elementos _únicos_ de la lista. O dicho de otra manera: los elementos que tenía la lista, omitiendo repetidos. |
+| `conjunto.toList()` | Devuelve una lista con los mismos elementos que tenga el conjunto.                                                                          |
 
 ## Manejo de errores
 
