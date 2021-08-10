@@ -4,23 +4,7 @@ title: Desarrollo guiado por pruebas (TDD)
 description: Una práctica de diseño de software, con un nombre que sugiere otra cosa y que te hará pensar en el código de otra forma.
 ---
 
-export const VideoYouTube = ({ id, titulo, descripcion }) => (
-  <div class="card">
-    <div class="card__image">
-      <iframe
-        src={`https://www.youtube.com/embed/${id}`}
-        class="post-content-video"
-        frameborder="0"
-        allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
-        allowfullscreen
-      ></iframe>
-    </div>
-    <div class="card__body">
-      <h3>{titulo}</h3>
-      <p>{descripcion}</p>
-    </div>
-  </div>
-);
+import { VideoYouTube } from '../../src/components/VideoYouTube';
 
 Aunque el nombre pueda sugerir otra cosa, el **desarrollo guiado por pruebas**, _test driven development_ o **TDD** es una técnica de desarrollo que nos propone escribir las pruebas antes que el código. Sin dudas, una de las consecuencias de usarla es que al finalizar contaremos con una buena batería de pruebas, aunque no es ese su objetivo principal.
 
