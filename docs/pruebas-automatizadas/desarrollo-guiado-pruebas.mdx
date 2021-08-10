@@ -1,0 +1,45 @@
+---
+sidebar_position: 2
+title: Desarrollo guiado por pruebas (TDD)
+description: Una práctica de diseño de software, con un nombre que sugiere otra cosa y que te hará pensar en el código de otra forma.
+---
+
+export const VideoYouTube = ({ id, titulo, descripcion }) => (
+  <div class="card">
+    <div class="card__image">
+      <iframe
+        src={`https://www.youtube.com/embed/${id}`}
+        class="post-content-video"
+        frameborder="0"
+        allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+        allowfullscreen
+      ></iframe>
+    </div>
+    <div class="card__body">
+      <h3>{titulo}</h3>
+      <p>{descripcion}</p>
+    </div>
+  </div>
+);
+
+Aunque el nombre pueda sugerir otra cosa, el **desarrollo guiado por pruebas**, _test driven development_ o **TDD** es una técnica de desarrollo que nos propone escribir las pruebas antes que el código. Sin dudas, una de las consecuencias de usarla es que al finalizar contaremos con una buena batería de pruebas, aunque no es ese su objetivo principal.
+
+Te invitamos a ver el siguiente video que explica más en profundidad sus objetivos:
+
+<VideoYouTube
+  id="8MGtLPFtbQ8"
+  titulo="Introducción veloz a TDD"
+  descripcion="Breve introducción conceptual a TDD."
+/>
+
+## Mejor que decir, es hacer
+
+En lo que a prácticas se refiere, ver a alguien hacerlo puede resultar mucho más educativo que una explicación teórica sobre en qué consiste la misma. Por esto, te dejamos a continuación un video donde resolvemos una pequeña parte de un ejercicio usando _TDD_, utilizando el lenguaje Kotlin.
+
+Y si bien cada lenguaje y _framework_ tiene sus particularidades, esta técnica es agnóstica de la tecnología. Por lo tanto, lo que se ve en el video a continuación se puede replicar en cualquier otra tecnología (que tenga una forma de escribir pruebas automatizadas, claro :smiley:).
+
+<VideoYouTube
+  id="MIb0FHaR_pc"
+  titulo="¿Cómo hacer TDD en Kotlin?"
+  descripcion="Práctica en vivo de TDD sobre el ejercicio Caralibro. El código que viene se incluye en ese repositorio fue elaborado en ese video, de forma tal que van a poder ver cómo es la práctica."
+/>
