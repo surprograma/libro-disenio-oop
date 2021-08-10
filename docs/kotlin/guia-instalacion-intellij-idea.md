@@ -52,4 +52,4 @@ sudo update-alternatives --config java
 
 ## Instalar Intellij IDEA
 
-Descargar **[Intellij-IDEA](https://www.jetbrains.com/es-es/idea/download/download-thanks.html?platform=windows&code=IIC**
+Descargar **[Intellij-IDEA](https://www.jetbrains.com/es-es/idea/download/download-thanks.html?platform=windows&code=IIC)**
