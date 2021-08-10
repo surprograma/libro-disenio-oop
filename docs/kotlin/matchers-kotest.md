@@ -1,93 +1,78 @@
 ---
 sidebar_position: 2
+title: Matchers de Kotest
+description: Machete sobre las formas más comunes para verificar condiciones en los tests.
 ---
 
-# Matchers de Kotest
-
-Esta es una lista, para nada exhaustiva, de los matchers que tiene Kotest (métodos para verificar condiciones en los tests).
+Esta es una lista, para nada exhaustiva, de los _matchers_ que tiene Kotest (métodos para verificar condiciones en los tests).
 
 Para ver otros métodos, recomendamos leer [la documentación](https://kotest.io/docs/assertions/core-matchers.html).
 
-## Matchers de igualdad
+## Igualdad
 
-### Si un objeto es igual a otro
+| Sintaxis                   | Sirve para verificar...                     |
+| -------------------------- | ------------------------------------------- |
+| `objeto.shouldBe(otro)`    | ...si un `objeto` **es igual** a `otro`.    |
+| `objeto.shouldNotBe(otro)` | ...si un `objeto` **es distinto** a `otro`. |
+| `booleano.shouldBeTrue()`  | ...si un `booleano` **es verdadero**.       |
+| `booleano.shouldBeFalse()` | ...si un `booleano` **es falso**.           |
 
-`objeto.shouldBe(otro)`
+### Un caso especial: números decimales
 
-Matchers relacionados:
+En informática, las operaciones con decimales suelen implementarse con una técnica llamada [**punto flotante**](http://puntoflotante.org/). Esta implementación trae aparejada una serie de imprecisiones, que afectan entre otras cosas a la [comparación](http://puntoflotante.org/errors/comparison/).
 
-- `shouldNotBe` (diferente)
-- `shouldBeGreaterThan` (mayor a)
-- `shouldBeLessThanOrEqual` (menor o igual a)
+Para evitar casos en los que un test rompa porque `"se esperaba 2.78 pero se obtuvo 2.78000000001"`, estas comparaciones se suelen hacer con una cierta **tolerancia**, que indica cuál es el desfasaje máximo aceptable.
 
-### Si un número con decimales (Double) es igual a otro
-
-Como la división y otras operaciones con decimales no suelen ser precisas, se compara de la siguiente forma:
+En Kotest, podemos configurar una tolerancia de la siguiente manera:
 
 ```kotlin
-valor.shouldBe(1.1 plusOrMinus(0.01))
+// Aceptamos como válido a cualquier número entre 2.77 y 2.79
+numero.shouldBe(2.78 plusOrMinus 0.01)
 ```
 
-Para evitar casos en los que el test rompa porque `"valor es 1.10000000001 y tendría que ser 1.1"`, le pasamos ese `0.01` que es la tolerancia (cuál es el desfasaje máximo aceptable).
+## Colecciones
 
-### Si algo es verdadero
+| Sintaxis                                        | Sirve para verificar...                                          |
+| ----------------------------------------------- | ---------------------------------------------------------------- |
+| `coleccion.shouldBeEmpty()`                     | ...si la colección **está vacía**.                               |
+| `coleccion.shouldBeUnique()`                    | ...si la colección **no tiene duplicados**.                      |
+| `coleccion.shouldContain(elemento)`             | ...si la colección **contiene** al `elemento`.                   |
+| `coleccion.shouldContainAll(elem1, elem2, ...)` | ...si la colección **contiene a todos** los elementos indicados. |
 
-En vez de `booleano.shouldBe(true)` podemos escribir simplemente `booleano.shouldBeTrue()`
+:eyes: **Ojo:** los dos últimos matchers verifican que los elementos dados existan, pero no dicen nada sobre los demás elementos de la colección.
 
-## Matchers de colecciones
+### Control estricto de elementos
 
-### Si la colección está vacía
+Algunas veces nos alcanza con verificar que los elementos que queremos existan, pero otras necesitamos verificar también que no haya otros elementos.
 
-`coleccion.shouldBeEmpty()`
+En ese caso, deberíamos usar alguno de los matchers que vienen a continuación:
 
-### Si la colección contiene un elemento
-
-`coleccion.shouldContain(elemento)`
-
-### Si la colección contiene algunos elementos
-
-`coleccion.shouldContainAll(elemento1, elemento2, ...)`
-
-En este caso no importa el orden (por ejemplo, `elemento2` podría estar antes que `elemento1` en la lista y esto no daría error).
-
-:eyes: **Ojo:** este matcher no dice nada sobre los demás elementos de la colección, y en algunos casos necesitamos verificar que no haya otros elementos. En ese caso, deberíamos usar alguno de los matchers que vienen a continuación.
-
-### Si la colección tiene exactamente un grupo de elementos (y ninguno más)
-
-#### En orden
+#### Verificando que aparezan en cierto orden:
 
 ```kotlin
-unaLista.shouldContainExactly(elemento1, elemento2, elemento3)
+unaLista.shouldContainExactly(elem1, elem2, ...)
 // o pasando una lista:
 unaLista.shouldContainExactly(otraLista)
 ```
 
-#### Sin importar el orden
+#### Sin importar en qué orden aparecen:
 
 ```kotlin
-unaLista.shouldContainExactlyInAnyOrder(elemento1, elemento2, elemento3)
+unaLista.shouldContainExactlyInAnyOrder(elem1, elem2, ...)
 // o pasando una lista:
 unaLista.shouldContainExactlyInAnyOrder(otraLista)
 ```
 
-### Si la colección no tiene duplicados
-
-`coleccion.shouldBeUnique()`
-
-## Matchers de excepciones
-
-### Si un fragmento de código lanza error
+## Excepciones
 
 ```kotlin
-shouldThrowAny {
-  codigoQueLanzaError()
+// Verificando el mensaje
+shouldThrowMessage("Acá va el mensaje de error que tira") {
+  codigoQueDeberiaLanzarUnError()
 }
-```
 
-### Si un fragmento de código NO lanza error
-
-```kotlin
-shouldNotThrow {
-  codigoQueNoDeberiaLanzarError()
+// Sin verificar el mensaje
+shouldThrowAny {
+  codigoQueDeberiaLanzarUnError()
 }
 ```
