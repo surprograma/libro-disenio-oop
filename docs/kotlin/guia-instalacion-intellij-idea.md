@@ -7,9 +7,9 @@ sidebar_position: 8
 ## Instalar JDK11
 
 ### 1-Chequear qué JDK tenés. Si tenés la JDK11, terminaste, si no tenés o tenés otra seguí:
-Para abrir la consola en windows o CMD debemos tocar a la vez las teclas ([WINDOWS]+[R]), escribir "cmd" y tocar la tecla [Enter]
+Para abrir la consola en windows o CMD debemos tocar a la vez las teclas ([WINDOWS]+[R]), escribir ```cmd``` y tocar la tecla [Enter]
 
-Dentro del CMD escribiremos "java -version" (sin las comillas), en el caso de no tener ninguna versión instalada nos dirá:
+Dentro del CMD escribiremos ```java -version``` , en el caso de no tener ninguna versión instalada nos dirá:
 ```bash
 "java" no se reconoce como un comando interno o externo, programa o archivo por lotes ejecutable
 ```
@@ -33,7 +33,7 @@ Descargar **[Intellij-IDEA](https://www.jetbrains.com/es-es/idea/download/downlo
 
 ### 1-Chequear qué OpenJDK11 tenés. Si tenés la OpenJDK11, terminaste, si no tenés o tenés otra seguí:
 
-Dentro de la Terminal escribiremos "java -version" (sin las comillas), en el caso de no tener ninguna versión instalada nos dirá:
+Dentro de la Terminal escribiremos ```java -version``` , en el caso de no tener ninguna versión instalada nos dirá:
 ```bash
 No se ha encontrado la orden «java», pero se puede instalar con... (dando opciones)
 ```
