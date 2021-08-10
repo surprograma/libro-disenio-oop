@@ -51,5 +51,12 @@ sudo update-alternatives --config java
 ```
 
 ## Instalar Intellij IDEA
+Ubuntu 21.04
+    
+```bash
+sudo snap install intellij-idea-community -classic
+```
+# Plugins - Intellij
+![Kotest](\img\docs\guia-instalacion-programas\intellij-plugin-kotest.png)
 
-Descargar **[Intellij-IDEA](https://www.jetbrains.com/es-es/idea/download/download-thanks.html?platform=windows&code=IIC)**
+![Kotling](\img\docs\guia-instalacion-programas\intellij-plugin-kotling.png)
