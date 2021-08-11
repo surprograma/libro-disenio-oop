@@ -1,5 +1,7 @@
 ---
-sidebar_position: 8
+sidebar_position: 1
+title: Guía de instalación IntelliJ Idea
+description: Instrucciones para instalar el IDE para trabajar con Kotlin
 ---
 
 # <i class="fab fa-windows"></i> Windows 
