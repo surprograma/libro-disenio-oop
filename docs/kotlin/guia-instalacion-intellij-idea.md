@@ -56,7 +56,7 @@ sudo update-alternatives --config java
 ```bash
 Sólo hay una alternativa en el grupo de enlaces java (que provee /usr/bin/java)...
 ```
-Esto quiere decir que debemos realizar el paso 2-instalación, porque no encuentra la openjdk11 ni existe otra versión distinta en el sistema.
+Esto quiere decir que debemos realizar el paso 2-instalación, porque no tenes la openjdk11 ni existe otra versión distinta en el sistema.
 
 -Ahora, si existen dos versiones o mas dentro de nuestro sistema, nos dirá:
 ```bash
