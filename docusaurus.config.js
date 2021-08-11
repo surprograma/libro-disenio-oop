@@ -6,7 +6,7 @@ const baseUrl = '/libro-disenio-oop/';
 /** @type {import('@docusaurus/types').DocusaurusConfig} */
 module.exports = {
   title: 'Diseño de software orientado a objetos',
-  url: 'https://surprograma.github.io/',
+  url: 'https://surprograma.github.io',
   baseUrl,
   onBrokenLinks: 'throw',
   onBrokenMarkdownLinks: 'warn',
