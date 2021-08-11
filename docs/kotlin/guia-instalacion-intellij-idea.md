@@ -4,7 +4,7 @@ title: Guía de instalación IntelliJ Idea
 description: Instrucciones para instalar el IDE para trabajar con Kotlin
 ---
 
-# <i class="fab fa-windows"></i> Windows
+# Windows
 
 ## Instalar JDK11
 
@@ -30,7 +30,7 @@ Debes seguir la siguiente **[Guia](http://programacionamartillazos.blogspot.com/
 
 Descargar **[Intellij-IDEA](https://www.jetbrains.com/es-es/idea/download/download-thanks.html?platform=windows&code=IIC)**
 
-# <i class="fab fa-ubuntu"></i> Ubuntu/Debian
+# Ubuntu/Debian
 
 ## Instalar OpenJDK11
 
