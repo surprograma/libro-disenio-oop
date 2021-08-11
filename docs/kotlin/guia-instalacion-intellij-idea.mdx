@@ -1,0 +1,147 @@
+---
+sidebar_position: 1
+title: Guía de instalación IntelliJ Idea
+description: Instrucciones para instalar el IDE para trabajar con Kotlin
+---
+
+import { SistemaOperativo, Codigo } from '../../src/components/Tabs.js';
+
+## Prerrequisito: Java Development Kit (JDK)
+
+Para poder ejecutar el IntelliJ Idea y los programas que escribas en Kotlin, vas a necesitar instalar el [Java Development Kit (JDK)](https://es.wikipedia.org/wiki/Java_Development_Kit). En base a pruebas que hemos realizado en distintas computadoras, recomendamos **enfáticamente** instalar la versión 11: ni una más reciente ni una más antigua.
+
+### Comprobar si el JDK ya está instalado
+
+Puede que ya lo tengas de otro proyecto, o incluso que haya venido instalado en tu sistema operativo. Podés comprobarlo de la siguiente manera:
+
+<SistemaOperativo>
+  <Codigo>
+
+Abrí una terminal y ejecutá el comando `java -version`.
+
+Si no tenés ninguna versión instalada, la salida se verá así:
+
+```shell
+$ java -version
+No se ha encontrado la orden «java», pero se puede instalar con... (varias opciones)
+```
+
+Caso contrario, la respuesta será similar a la siguiente:
+
+```shell
+$ java -version
+openjdk version "11.0.11" 2021-04-20
+OpenJDK Runtime Environment (build 11.0.11+9-Ubuntu-0ubuntu2.20.04)
+OpenJDK 64-Bit Server VM (build 11.0.11+9-Ubuntu-0ubuntu2.20.04, mixed mode, sharing)
+```
+
+  </Codigo>
+  <Codigo>
+
+Vamos a ejecutar un comando en la consola. Para abrirla, presioná a la vez las teclas <kbd>Windows + R</kbd>, escribí `cmd` en la ventana que aparece y luego presioná <kbd>Enter</kbd>.
+
+Dentro del `cmd` escribí `java -version` y presioná <kbd>Enter</kbd>.
+
+En el caso de no tener ninguna versión instalada, la salida se verá así:
+
+```bash
+C:\Users\Pepita>java -version
+"java" no se reconoce como un comando interno o externo, programa o archivo por lotes ejecutable
+```
+
+Caso contrario, será similar a la siguiente:
+
+```shell
+C:\Users\Pepita>java -version
+openjdk version "11.0.11" 2021-04-20
+OpenJDK Runtime Environment (build 11.0.11+9-Ubuntu-0ubuntu2.20.04)
+OpenJDK 64-Bit Server VM (build 11.0.11+9-Ubuntu-0ubuntu2.20.04, mixed mode, sharing)
+```
+
+  </Codigo>
+</SistemaOperativo>
+
+En el caso de que no tengas ninguna versión, o tengas una que no es la 11, podés proceder a [instalar el JDK 11](#instalar-el-jdk-11).
+
+### Instalar el JDK 11
+
+<SistemaOperativo>
+  <Codigo>
+
+Ejecutá el siguiente comando:
+
+```bash
+sudo apt install openjdk-11-jre-headless
+```
+
+  </Codigo>
+  <Codigo>
+
+Visitá el sitio de [Oracle](https://www.oracle.com/ar/java/technologies/javase-jdk11-downloads.html), registrate, descargá el JDK, instalalo y reiniciá la máquina. Hasta donde sabemos, no hay una forma más sencilla de instalarlo, ni es posible usar la OpenJDK. :shrug:
+
+  </Codigo>
+</SistemaOperativo>
+
+### Verificar que se haya instalado la versión correcta
+
+Volvé a ejecutar los pasos descriptos en [Comprobar si el JDK ya está instalado](#comprobar-si-el-jdk-ya-está-instalado) y verificá si la versión que aparece es la 11.
+
+Si es así, ya podés [Instalar IntelliJ Idea](#instalar-intellij-idea). Caso contrario, deberás indicarle a tu sistema operativo qué versión usar.
+
+<SistemaOperativo>
+  <Codigo>
+
+Dentro de una terminal ejecutá lo siguiente:
+
+```bash
+sudo update-alternatives --config java
+```
+
+Lo cual debería arrojar un mensaje como el siguiente...
+
+```bash
+Existen X opciones para la alternativa de java (que provee /usr/bin/java)...
+```
+
+...mostrando una tabla con un número de seleccion a la izquierda de cada versión y la siguiente leyenda al final:
+
+```bash
+Pulse <Intro> para mantener el valor por omisión [*] o pulse un número de selección:
+```
+
+En este caso, debemos elegí el número de opcion que correspondá a `java-11-openjdk` y presioná <kbd>Enter</kbd>.
+
+  </Codigo>
+  <Codigo>
+
+Seguí la siguiente [guía](http://programacionamartillazos.blogspot.com/2017/07/windows-como-setear-la-version-de-java.html).
+
+  </Codigo>
+</SistemaOperativo>
+
+## Instalar IntelliJ IDEA
+
+<SistemaOperativo>
+  <Codigo>
+
+Dentro de una terminal ejecutá lo siguiente:
+
+```bash
+sudo snap install intellij-idea-community -classic
+```
+
+  </Codigo>
+  <Codigo>
+
+Descargá el instalador desde el [sitio oficial](https://www.jetbrains.com/es-es/idea/download/download-thanks.html?platform=windows&code=IIC) y seguí las instrucciones.
+
+  </Codigo>
+</SistemaOperativo>
+
+## Instalar el plugin de Kotest
+
+Para poder ejecutar los tests es necesario instalar el plugin de [Kotest](https://kotest.io/), el framework que sugerimos utilizar desde este espacio. Esto se hace desde el mismo IDE.
+
+Accedé a la ventana `Settings` presionando <kbd>Ctrl + Alt + S</kbd> y seguí los pasos que se ven a continuación:
+
+![Kotest](/img/docs/guia-instalacion-intellij-idea/plugin-kotest.gif)
