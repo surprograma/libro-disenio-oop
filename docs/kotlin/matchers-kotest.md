@@ -1,5 +1,5 @@
 ---
-sidebar_position: 2
+sidebar_position: 3
 title: Matchers de Kotest
 description: Machete sobre las formas más comunes para verificar condiciones en los tests.
 ---
