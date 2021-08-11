@@ -54,7 +54,7 @@ sudo update-alternatives --config java
 ```
 La cual nos dirá:
 ```bash
-Sólo hay una alternatica en el grupo de enlaces java (que provee /usr/bin/java)...
+Sólo hay una alternativa en el grupo de enlaces java (que provee /usr/bin/java)...
 ```
 Esto quiere decir que debemos realizar el paso 2-instalación, porque no encuentra la openjdk11 ni existe otra versión en el sistema.
 
