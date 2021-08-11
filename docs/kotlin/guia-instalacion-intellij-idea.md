@@ -2,14 +2,14 @@
 sidebar_position: 8
 ---
 
-# <i class="fab fa-windows"></i> Windows - guía de instalación Intellij IDEA   
+# <i class="fab fa-windows"></i> Windows 
 
 ## Instalar JDK11
 
 ### 1-Chequear qué JDK tenés. Si tenés la JDK11, terminaste, si no tenés o tenés otra seguí:
-Para abrir la consola en windows o CMD debemos tocar a la vez las teclas ([WINDOWS]+[R]), escribir ```cmd``` y tocar la tecla [Enter]
+Para abrir la consola en windows o CMD debemos tocar a la vez las teclas ([WINDOWS]+[R]), escribir `cmd` y tocar la tecla [Enter]
 
-Dentro del CMD escribiremos ```java -version``` , en el caso de no tener ninguna versión instalada nos dirá:
+Dentro del CMD escribiremos `java -version` , en el caso de no tener ninguna versión instalada nos dirá:
 ```bash
 "java" no se reconoce como un comando interno o externo, programa o archivo por lotes ejecutable
 ```
@@ -27,13 +27,13 @@ Descargar **[Intellij-IDEA](https://www.jetbrains.com/es-es/idea/download/downlo
 
 
 
-# <i class="fab fa-ubuntu"></i> Ubuntu/Debian - guía de instalación Intellij IDEA   
+# <i class="fab fa-ubuntu"></i> Ubuntu/Debian  
 
 ## Instalar OpenJDK11
 
 ### 1-Chequear qué OpenJDK11 tenés. Si tenés la OpenJDK11, terminaste, si no tenés o tenés otra seguí:
 
-Dentro de la Terminal escribiremos ```java -version``` , en el caso de no tener ninguna versión instalada nos dirá:
+Dentro de la Terminal escribiremos `java -version` , en el caso de no tener ninguna versión instalada nos dirá:
 ```bash
 No se ha encontrado la orden «java», pero se puede instalar con... (dando opciones)
 ```
@@ -45,7 +45,7 @@ sudo apt install openjdk-11-jre-headless
 ```
 ### 3-¿Tenes 2 versiones de Java?
 
-Dentro de  la Terminal escribir lo siguiente, eso nos va a mostrar las opciones de java dentro de nuesto S.O para luego elegir cual queremos utilizar. 
+Dentro de  la Terminal escribir lo siguiente, eso nos va a mostrar las opciones de java dentro de nuesto S.O para luego elegir OpenJDK11. 
 ```bash
 sudo update-alternatives --config java
 ```
@@ -57,6 +57,6 @@ Ubuntu 21.04
 sudo snap install intellij-idea-community -classic
 ```
 # Plugins - Intellij
-![Kotest](\img\docs\guia-instalacion-programas\intellij-plugin-kotest.png)
+![Kotest](/img/docs/guia-instalacion-programas/intellij-plugin-kotest.png)
 
-![Kotling](\img\docs\guia-instalacion-programas\intellij-plugin-kotling.png)
+![Kotling](/img/docs/guia-instalacion-programas/intellij-plugin-kotling.png)
