@@ -260,106 +260,67 @@ Ahora al fallar el test sabemos más cosas:
 - qué es lo que estamos testeando, tratando de no entrar en detalles para no duplicar lo que dice el código,
 - qué se esperaba que pasara y no pasó, en un formato _más o menos_ legible para un usuario: “Una ferretería puede fiarle a una constructora con muchos albañiles”.
 
-<!-- # Pasando a un ejemplo práctico:
+## Buenas prácticas
 
-En un nuevo archivo llamese `clientesTest.kt`, con un nombre que evidencia la clase que se va a testear más no lo que se está testeando **Ej**: `clienteConstructoraCon5Albaniles.kt`, ya que se pueden testear muchas cosas en un mismo archivo.
+Más allá de lo explicado hasta aquí, compartimos también algunas buenas prácticas que pueden ser útiles a la hora de armar nuestras pruebas.
 
-Al igual que los desribes e its, elegir nombres para las instancias de los objetos que especifiquen que es lo que testea es sumamente importante.
+### El patrón AAA: Arrange-Act-Assert
 
-No es lo mismo: `val miConstructora = EmpresaConstructora(albaniles= 3, deuda = 0)` que ` empresaConstructoraSinDeudas EmpresaConstructora(albaniles= 5, deuda = 7000)`
+Una de las formas más comunes de estructurar las pruebas es utilizando el patrón AAA: _Arrange_, _Act_ y _Assert_.
 
-```kotlin
-class ClientesTest : DescribeSpec({
-  val ferreteria = Ferreteria()
+No es necesario cumplirlo a rajatabla - y de hecho el ejemplo de este apunte no lo cumple :sweat_smile: -, pero tenerlo en mente puede ayudarnos a entender si nuestro test tiene todo lo que debería tener.
 
-  describe("Puede fiar a clientes") {
-    describe("A un cliente particular") {
-      //Elegir nombres que represente la clase de equivalencia que estamos modelando.
-      val clienteParticular = ClienteParticular(deuda=0)
-      val clienteParticularDeudor = ClienteParticular(deuda=50)
+Según este patrón, cada test se puede dividir en tres "momentos":
 
-      it("Sin deudas") {
-          ferreteria.puedeFiarA(clienteParticular).shouldBeTrue()
-        }
+- **Arrange**: que podría traducirse como _arreglar_ o _gestionar_, en donde se instancian los objetos a testear, en este ejemplo la ferreteria y sus clientes. Cuando estos objetos son compartidos entre varios tests, los frameworks nos permiten ubicarlos en algún lugar común, por ejemplo dentro de un mismo `describe`. La desventaja de esta técnica es que para tener una idea general de los elementos que participan en el test debemos mirar el test **y además** el código de inicialización en el que está enmarcado.
+- **Act**: que podría traducirse como _actuar_. Son operaciones que tienen algún efecto sobre los objetos creados, y que posteriormente vamos a querer comprobar que hicieron lo que debían. Hay tests, como los de este apunte, que no necesitan disparar acciones, y está bien que eso ocurra.
+- **Assert**: que podría traducirse como _afirmar_. Es la parte donde escribimos lo que esperamos que pase, generalmente asociado a las respuestas que da el envío de un mensaje al objeto testeado.
 
-      it("Que adeuda algo") {
-        ferreteria.puedeFiarA(clienteParticularDeudor).shouldBeFalse()
-      }
-    }
+Veamos un ejemplo sencillo que puede desglosarse fácilmente en esos tres componentes:
 
-    describe("A una empresa constructora") {
-      val empresaConstructoraChica = EmpresaConstructora(albaniles=4, deuda=5000)
-      val empresaConstructoraGrande = EmpresaConstructora(albaniles=5 deuda=10000)
-
-      describe("Con menos de 5 albañiles") {
-        it("Si adeuda hasta 5.000")
-        ferreteria.puedeFiarA(empresaConstructoraChica).shouldBeTrue()
-
-        it("Si adeuda más de 5.000") {
-          empresaConstructoraChica.generarDeudaPor(1000)
-
-          //Notar que ahora la deuda de la "empresaConstructoraChica" va a ser de 6.000
-          empresaConstructoraChica.deuda.shouldBe(6000)
-
-          ferreteria.puedeFiarA(empresaConstructoraChica).shouldBeFalse()
-        }
-      }
-
-      describe("Con 5 albañiles") {
-        it("Si adeuda hasta 10.000") {
-          ferreteria.puedeFiarA(empresaConstructoraGrande).shouldBeTrue()
-        }
-
-        it("Si adeuda más de 10.000") {
-          empresaConstructoraGrande.generarDeudaPor(1000)
-
-          //Notar que ahora la deuda de la "empresaConstructoraGrande" va a ser de 6.000
-          empresaConstructoraGrande.deuda.shouldBe(11000)
-
-          ferreteria.puedeFiarA(empresaConstructoraGrande).shouldBeFalse()
-        }
-      }
-    }
-  }
-``` -->
-
-<!-- ## AAA Pattern
-
-Los tests suelen estructurarse según el patrón AAA: Arrange, Act y Assert.
-
-- **Arrange**: Que podría traducirse, cómo arreglar o gestionar, en dónde se instancian los objetos a testear(la Ferreteria y los Clientes). Cuando los contextos son compartidos, los frameworks basados en xUnit (JUnit5 es uno de ellos) nos permiten ubicarlo en un método setup (@BeforeEach). La desventaja de esta técnica es que para tener una idea general de los elementos que participan en el test debemos mirar el test y el setup, por eso una alternativa suele ser tener métodos en el test que construyen el escenario que se necesita:
-
-- **Act**: Son las operaciones que tienen efecto. por ejemplo el método del cliente `generarDeudaPor(cantidad)`. Hay tests que quizás no necesiten disparar acciones, y está bien que eso ocurra.
-
-- **Assert**: Lo que esperamos que pase, generalmente asociado a las respuestas que da el envío de un mensaje al objeto testeado.
-
-## One assert per test
-
-Hay ciertas controversias respecto a si podemos tener varios asserts en el mismo test, ya que cuando el primer assert falla los siguientes no se siguen evaluando: esto en realidad depende del runner de xUnit, podríamos eventualmente trabajar con un framework que continue buscando asserts y discrimine cuáles anduvieron y cuáles no (RSpec, framework de testeo para Ruby, hace ésto).
-
-Por lo que nuestro consejo es: Los tests deben fallar por exactamente un solo motivo, esto relaja esa restricción.
-En resúmen lo importante no es tener un solo `assert`, sino que todos los `asserts` estén relacionados con la misma funcionalidad.
+<KotlinTypescript>
+  <Codigo>
 
 ```kotlin
-describe("Nuestros empleados"){
-  it("Obtener correctamente nuestros Empleados") {
-    val albaniles =  mutableListOf("Bruno", "Ricardo", "Damián")
-    albaniles.size.shouldBe(3)
-    albaniles.get(0).shouldBe("Bruno")
-    albaniles.get(1).shouldBe("Ricardo")
-    albaniles.get(2).shouldBe("Damián")
+describe("Un ave") {
+  it("pierde energía al volar") {
+    // ARRANGE: se crea el objeto
+    val pepita = Ave(1000)
+
+    // ACT: se realizan las acciones
+    pepita.volar()
+
+    // ASSERT: se verifica el efecto
+    pepita.energia.shouldBe(900)
   }
 }
-``` -->
+```
 
-<!-- ## Resúmen
+  </Codigo>
+  <Codigo>
 
-- Armá escenarios que definan las clases de tests.
-- Definí los `describe` e `it` según corresopnda para cada test, de manera de entender qué estamos testeando. El cómo lo terminás de ver en el código, evitá duplicidades entre el texto que explica y el código escrito.
-- Evitá que un `describe` tenga muchos escenarios juntos, es más difícil seguirlos.
-- Los nombres de las variables deben reflejar la clase de equivalencia que están resolviendo, y no casos particulares (sí empresaConstructoraChica, no empresita o miEmpresa).
-- Los tests se suelen estructurar utilizando las tres A: Arrange (el setup que conviene mantenerlo simple), Act (operaciones con efecto cuando corresponde) y Assert (las aserciones que pueden ser más de una por cada test, pero deben testear el mismo concepto). -->
+```typescript
+describe('Un ave', () => {
+  it('pierde energía al volar', () => {
+    // ARRANGE: se crea el objeto
+    const pepita = new Ave(1000);
+
+    // ACT: se realizan las acciones
+    pepita.volar();
+
+    // ASSERT: se verifica el efecto
+    expect(pepita.energia).toBe(900);
+  });
+});
+```
+
+  </Codigo>
+</KotlinTypescript>
 
 ## Créditos
 
 Este apunte es una adaptación de [Testeo unitario avanzado](http://wiki.uqbar.org/wiki/articles/testeo-unitario-avanzado.html), elaborado por Fernando Dodino para la [Fundación Uqbar](https://www.uqbar.org/#/).
+
+```
+
+```
