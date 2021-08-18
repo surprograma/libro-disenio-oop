@@ -1,7 +1,6 @@
 ---
 sidebar_position: 1
 title: Introducción a las cualidades de diseño
-description: Machete sobre las formas más comunes para verificar condiciones en los tests.
 ---
 
 Cuando nos toca analizar un sistema, ya sea existente o aún tan sólo presente en nuestras mentes, frecuentemente nos encontraremos con aspectos de su diseño que “nos hacen ruido”: por ejemplo, muchas veces veremos partes difíciles de modificar, o excesivamente complejas, o que presentan abstracciones confusas.  
