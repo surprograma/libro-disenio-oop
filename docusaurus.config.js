@@ -19,6 +19,7 @@ module.exports = {
     locales: ['es'],
   },
   themeConfig: {
+    image: 'img/og-image.png',
     colorMode: {
       respectPrefersColorScheme: true,
       switchConfig: {
