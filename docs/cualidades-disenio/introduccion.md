@@ -3,9 +3,11 @@ sidebar_position: 1
 title: Introducción a las cualidades de diseño
 ---
 
+> Este artículo es una adaptación de [Cualidades de diseño](https://docs.google.com/document/d/14HdvHvS33WqYb6Ak0BGa0IeCTbzeCRSDKs-1Ot-qLDw/edit), elaborado por Nicolás Passerini, Carlos Lombardi, Fernando Dodino, Leonardo Gassman, Rodrigo Merino, Juan Zaffaroni, Franco Bulgarelli y Federico Aloi.
+
 Cuando nos toca analizar un sistema, ya sea existente o aún tan sólo presente en nuestras mentes, frecuentemente nos encontraremos con aspectos de su diseño que “nos hacen ruido”: por ejemplo, muchas veces veremos partes difíciles de modificar, o excesivamente complejas, o que presentan abstracciones confusas.  
 
-Y si somos además responsables del uso, mantenimiento o construcción de dichos componentes, probablemente esto venga acompañado del recuerdo poco feliz de las personas que lo idearon. :angry:
+Y si somos además responsables del uso, mantenimiento o construcción de dichos componentes, probablemente esto venga acompañado del recuerdo poco feliz de las personas que lo idearon. :sweat_smile:
 
 ## ¿Qué son las cualidades de diseño?
 

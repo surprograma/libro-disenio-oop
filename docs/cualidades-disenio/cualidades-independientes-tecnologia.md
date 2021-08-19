@@ -3,6 +3,8 @@ sidebar_position: 2
 title: Cualidades independientes de la tecnología
 ---
 
+> Este artículo es una adaptación de [Cualidades de diseño](https://docs.google.com/document/d/14HdvHvS33WqYb6Ak0BGa0IeCTbzeCRSDKs-1Ot-qLDw/edit), elaborado por Nicolás Passerini, Carlos Lombardi, Fernando Dodino, Leonardo Gassman, Rodrigo Merino, Juan Zaffaroni, Franco Bulgarelli y Federico Aloi.
+
 Las cualidades que describimos a continuación son, hasta cierto punto, independientes de la tecnología que utilicemos en nuestro desarrollo. 
 
 La tecnología, y en particular el lenguaje de programación que utilicemos, será un factor limitante en cuánto a cuáles diseños podemos hacer y cuáles no, pero aún así siempre podremos analizarlo en términos de estas cualidades.
