@@ -1,11 +1,12 @@
 ---
 sidebar_position: 1
 title: Introducción a las cualidades de diseño
+description: Seguramente alguna vez te pasó que un diseño "no te cierra" pero no pudiste explicar por qué. En este artículo comenzamos a ponerle nombre a esos aspectos.
 ---
 
 > Este artículo es una adaptación de [Cualidades de diseño](https://docs.google.com/document/d/14HdvHvS33WqYb6Ak0BGa0IeCTbzeCRSDKs-1Ot-qLDw/edit), elaborado por Nicolás Passerini, Carlos Lombardi, Fernando Dodino, Leonardo Gassman, Rodrigo Merino, Juan Zaffaroni, Franco Bulgarelli y Federico Aloi.
 
-Cuando nos toca analizar un sistema, ya sea existente o aún tan sólo presente en nuestras mentes, frecuentemente nos encontraremos con aspectos de su diseño que “nos hacen ruido”: por ejemplo, muchas veces veremos partes difíciles de modificar, o excesivamente complejas, o que presentan abstracciones confusas.  
+Cuando nos toca analizar un sistema, ya sea existente o aún tan sólo presente en nuestras mentes, frecuentemente nos encontraremos con aspectos de su diseño que “nos hacen ruido”: por ejemplo, muchas veces veremos partes difíciles de modificar, o excesivamente complejas, o que presentan abstracciones confusas.
 
 Y si somos además responsables del uso, mantenimiento o construcción de dichos componentes, probablemente esto venga acompañado del recuerdo poco feliz de las personas que lo idearon. :sweat_smile:
 
@@ -13,7 +14,7 @@ Y si somos además responsables del uso, mantenimiento o construcción de dichos
 
 Esto nos da una intuición sobre qué es la calidad del diseño. Lo que buscaremos ahora es justamente refinar esta idea, formar criterios más sofisticados sobre qué diferencia a un buen diseño de uno deficitario, que conoceremos como **cualidades de diseño**. Puesto en otros términos, nos ayudará a poder responder la pregunta: ¿es el diseño A mejor que B?
 
-Lo interesante es que estos criterios nos permitirán analizar y tomar decisiones más formadas. No serán nuestras únicas guías, claro: el criterio, experiencia y conocimiento de quienes construyan el software serán elementos clave. Por lo tanto, debemos interpretar las cualidades de diseño como heurísticas antes que reglas. 
+Lo interesante es que estos criterios nos permitirán analizar y tomar decisiones más formadas. No serán nuestras únicas guías, claro: el criterio, experiencia y conocimiento de quienes construyan el software serán elementos clave. Por lo tanto, debemos interpretar las cualidades de diseño como heurísticas antes que reglas.
 
 Las cualidades de diseño, como veremos a continuación, estarán en general enunciadas en forma de principios más o menos genéricos, pero cuya interpretación será diferente según la tecnología empleada. Por ejemplo, analizar el acoplamiento entre dos componentes desarrollados bajo el paradigma funcional será diferente de hacerlo entre dos componentes desarrollados bajo el paradigma de objetos.
 
@@ -27,13 +28,14 @@ Para hablar de cualidades de diseño, deberemos tener siempre un **diseño alter
 
 Como veremos más adelante, muchas veces nos encontramos con que favorecer una cualidad de diseño en una solución perjudica a otra. O por el contrario, una mejora en una se traduce también en una mejora en otra. Es decir, algunas cualidades tienen _correlación positiva_, como por ejemplo **cohesión** y **abstracción**, o **desacoplamiento** y **testeabilidad**. Pero otras entran en conflicto y más bien, parecen oponerse: **flexibilidad** y **robustez** o **simplicidad** y **extensibilidad**.
 
-Es el _síndrome de la frazada corta_: o me abrigo los pies o me abrigo los hombros, pero ambas cosas no puedo. :shrug: 
+Es el _síndrome de la frazada corta_: o me abrigo los pies o me abrigo los hombros, pero ambas cosas no puedo. :shrug:
 
-Estos casos son más interesantes, porque tenemos que elegir a qué cualidad le daremos preponderancia. Y no sólo con conocimiento técnico sino también con conocimiento del negocio y del contexto humano del desarrollo.  
+Estos casos son más interesantes, porque tenemos que elegir a qué cualidad le daremos preponderancia. Y no sólo con conocimiento técnico sino también con conocimiento del negocio y del contexto humano del desarrollo.
 
-Algunos ejemplos: 
+Algunos ejemplos:
+
 - Si estamos construyendo un sistema provisorio cuyo tiempo de vida estimado es de 6 meses, no necesito pensar en la **mantenibilidad**.
-- Si estoy construyendo un prototipo para validar la idea de un producto o servicio, la **simplicidad** será clave. 
+- Si estoy construyendo un prototipo para validar la idea de un producto o servicio, la **simplicidad** será clave.
 - Si soy responsable de un sistema de control de un avión que por diseño no va a cambiar, la **flexibilidad** no me parecerá importante pero la **performance** y **robustez** serán críticas.
 - Si estoy desarrollando un sistema para una clienta, pero sé que en el futuro inmediato tendré que construir sistemas muy similares para otros clientes, probablemente valga la pena construir buenas **abstracciones** genéricas que me permitan reutilizar los componentes.
 
@@ -45,5 +47,5 @@ A modo de ejemplo, les presentamos la [documentación del API de tiempo (en ingl
 - Cómo [repartieron las responsabilidades entre sus paquetes](http://docs.oracle.com/javase/tutorial/datetime/overview/packages.html) con el objetivo de mantenerlos **cohesivos**.
 - Cómo lograron una [nomenclatura](http://docs.oracle.com/javase/tutorial/datetime/overview/naming.html) **consistente**.
 - Cómo construyeron buenas **abstracciones** que representen [cada una de las posibles formas de tratar el tiempo](http://docs.oracle.com/javase/tutorial/datetime/iso/overview.html) - quizás a costa de resignar algo de **simplicidad**.
-- Cómo proveyeron [dos mecanismos para construir los objetos de la biblioteca](http://docs.oracle.com/javase/tutorial/datetime/iso/clock.html): uno simple, y otro que permita la **facilidad de prueba** del código que use esta biblioteca. 
+- Cómo proveyeron [dos mecanismos para construir los objetos de la biblioteca](http://docs.oracle.com/javase/tutorial/datetime/iso/clock.html): uno simple, y otro que permita la **facilidad de prueba** del código que use esta biblioteca.
 - Una [comparación entre esta biblioteca la anterior versión de la misma](http://docs.oracle.com/javase/tutorial/datetime/iso/legacy.html) (con un diseño diferente), en donde está implícita la idea de **robustez**.

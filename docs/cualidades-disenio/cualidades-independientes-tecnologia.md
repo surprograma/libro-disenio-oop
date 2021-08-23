@@ -1,17 +1,18 @@
 ---
 sidebar_position: 2
 title: Cualidades independientes de la tecnología
+description: 'Una breve descripción de algunas de las cualidades de diseño más populares: acoplamiento, cohesión, robustez y varias más.'
 ---
 
 > Este artículo es una adaptación de [Cualidades de diseño](https://docs.google.com/document/d/14HdvHvS33WqYb6Ak0BGa0IeCTbzeCRSDKs-1Ot-qLDw/edit), elaborado por Nicolás Passerini, Carlos Lombardi, Fernando Dodino, Leonardo Gassman, Rodrigo Merino, Juan Zaffaroni, Franco Bulgarelli y Federico Aloi.
 
-Las cualidades que describimos a continuación son, hasta cierto punto, independientes de la tecnología que utilicemos en nuestro desarrollo. 
+Las cualidades que describimos a continuación son, hasta cierto punto, independientes de la tecnología que utilicemos en nuestro desarrollo.
 
 La tecnología, y en particular el lenguaje de programación que utilicemos, será un factor limitante en cuánto a cuáles diseños podemos hacer y cuáles no, pero aún así siempre podremos analizarlo en términos de estas cualidades.
 
 ## Simplicidad
 
-Dado que la idea de simplicidad es muy amplia, vamos a tomar la interpretación de KISS (_Keep it simple, stupid_) y YAGNI (_You aren’t gonna need it_): no sobrediseñar, focalizándonos en las necesidades conocidas del sistema. 
+Dado que la idea de simplicidad es muy amplia, vamos a tomar la interpretación de KISS (_Keep it simple, stupid_) y YAGNI (_You aren’t gonna need it_): no sobrediseñar, focalizándonos en las necesidades conocidas del sistema.
 
 **KISS:** muchas veces hay abstracciones que no son fundamentales, no surgen del negocio o su presencia no aporta a la solución. Lo que nos propone KISS es que cualquier complejidad innecesaria debería ser evitada.
 
@@ -28,11 +29,12 @@ En definitiva, a medida que tengamos que mantener en nuestra mente más abstracc
 ## Robustez
 
 La robustez nos dice que ante un uso inadecuado por parte del usuario, sistemas externos o ante fallas internas:
+
 - El sistema no debe generar información o comportamiento inconsistente/errático.
-- El sistema debe reportar los errores y volver a un estado consistente.	
+- El sistema debe reportar los errores y volver a un estado consistente.
 - El sistema debe facilitar tanto como sea posible la detección de la causa del problema.
 
-Es decir, la robustez no se trata de evitar que un sistema falle (lo cual es prácticamente inevitable), sino de establecer mecanismos para lidiar de forma "agraciada" con las situación excepcionales. 
+Es decir, la robustez no se trata de evitar que un sistema falle (lo cual es prácticamente inevitable), sino de establecer mecanismos para lidiar de forma "agraciada" con las situación excepcionales.
 
 Un principio que nos ayudará a mejorar esta cualidad en nuestras soluciones será el de _Fail Fast_ (fallar rápido). Este nos propone que ante el indicio de un comportamiento incorrecto, el sistema debe abortar de forma ordenada la ejecución de su operatoria y reportar el error. Seguir este principio minimizará las probabilidades de generar inconsistencias y facilitará encontrar la causa del problema (dado que el error se reportará próximo al momento y lugar en donde ocurrió).
 
@@ -40,21 +42,22 @@ Esto contrasta con otra interpretación de robustez: “cuánta tranquilidad le 
 
 ## Flexibilidad
 
-Capacidad de reflejar cambios en el dominio de manera simple y sencilla. Podemos verlo en dos ejes: extensibilidad (capacidad de agregar nuevas características con poco impacto) y mantenibilidad (capacidad de modificar las características existentes con el menor esfuerzo posible). 
+Capacidad de reflejar cambios en el dominio de manera simple y sencilla. Podemos verlo en dos ejes: extensibilidad (capacidad de agregar nuevas características con poco impacto) y mantenibilidad (capacidad de modificar las características existentes con el menor esfuerzo posible).
 
 ## Acoplamiento
 
 El acoplamiento es el grado de dependencia entre dos módulos/componentes, es decir, es el nivel de conocimiento que un módulo tiene sobre otro. Pensemos que cuanto mayor sea el acoplamiento, los cambios o errores de un módulo repercutirán en mayor medida sobre el otro módulo.
 
 Buscaremos minimizar el acoplamiento para:
-- Mejorar la mantenibilidad	
+
+- Mejorar la mantenibilidad
 - Aumentar la reutilización
 - Evitar que un defecto en un módulo se propague a otros, haciendo dificultoso detectar dónde está el problema.
 - Minimizar el riesgo de tener que tocar múltiples componentes ante una modificación, cuando solo se debería modificar uno.
 
 ## Cohesión
 
-Un módulo o componente cohesivo tiende a tener todos sus elementos abocados a resolver el mismo problema. Puesto en otras palabras, la cohesión se trata de cuántas responsabilidades tiene el componente: cuantas más sean, menos cohesivo será. 
+Un módulo o componente cohesivo tiende a tener todos sus elementos abocados a resolver el mismo problema. Puesto en otras palabras, la cohesión se trata de cuántas responsabilidades tiene el componente: cuantas más sean, menos cohesivo será.
 
 En el caso de objetos, podemos ver fácilmente cuando un objeto o clase tiene dos métodos que apuntan a resolver, cada uno, tareas diferentes. Podríamos incluso pensarlo a nivel de cada método, analizando cuántas tareas resuelve.
 
@@ -63,11 +66,13 @@ En el caso de objetos, podemos ver fácilmente cuando un objeto o clase tiene do
 La testeabilidad de un sistema nos permite asegurar que el código funciona correctamente y es mantenible. Verificar la testeabilidad de componentes pequeños, ayudará a mejorar el sistema en general.
 
 ## Abstracción
-Podemos pensar a la idea de abstracción en, al menos, dos ejes: su calidad y su cantidad. 
+
+Podemos pensar a la idea de abstracción en, al menos, dos ejes: su calidad y su cantidad.
 
 Por un lado, deberíamos apuntar a construir buenas abstracciones que definan metáforas consistentes y que encajen con nuestros modelos mentales sobre la realidad. Dicho informalmente, que la abstracción “cierre”, no “nos genere ruido”.
 
 Cuando tenemos mejores abstracciones estamos maximizando dos cualidades de diseño más:
+
 - **Reusabilidad**: posibilidad de utilizar un módulo/componente construido anteriormente para resolver un problema nuevo.
 - **Genericidad**: poder utilizar un módulo/componente definido anteriormente que se puede aplicar para resolver problemas distintos.
 
@@ -77,7 +82,7 @@ Una estructura de datos fundamental es la Pila, la cual es muy poderosa por su s
 
 Sus dos operaciones fundamentales son _apilar_ y _desapilar_. ¿Qué pasaría si modeláramos una pila con un objeto, que entienda los mensajes `apilar(elemento)` y `desapilar()`, pero además le pusieramos el método `insertar(posicion, elemento)`?
 
-Nuestra abstracción dejaría de “cerrar”, no porque haya perdido cohesión (`apilar` e `insertar` son dos métodos orientados a lo mismo: agregar elementos al contenedor) sino porque la operación de inserción en un una posición arbitraria deja de encajar con la idea de una pila. 
+Nuestra abstracción dejaría de “cerrar”, no porque haya perdido cohesión (`apilar` e `insertar` son dos métodos orientados a lo mismo: agregar elementos al contenedor) sino porque la operación de inserción en un una posición arbitraria deja de encajar con la idea de una pila.
 
 :::
 
@@ -87,24 +92,25 @@ Acá estamos entrando en una aparente contradicción con la cualidad de simplici
 
 ## Consistencia
 
-Un diseño es consistente cuando ante problemas de diseño similares, se tomaron decisiones de diseño similares. Se trata de aplicar los mismos criterios uniformemente a lo largo del diseño, haciéndolo más predecible para alguien que ocasionalmente mire nuestro código y facilitando su comprensión. 
+Un diseño es consistente cuando ante problemas de diseño similares, se tomaron decisiones de diseño similares. Se trata de aplicar los mismos criterios uniformemente a lo largo del diseño, haciéndolo más predecible para alguien que ocasionalmente mire nuestro código y facilitando su comprensión.
 
 ## Redundancia mínima
 
 Un diseño presenta redundancia cuando el mismo conocimiento está presente en múltiples lugares, ya sea porque contempla múltiples mecanismos orientados a realizar la misma tarea, o porque la información que el sistema mantiene se encuentra directa o indirectamente duplicada.
 
-La **repetición de lógica**, provoca que cambiar el comportamiento del sistema sea más difícil, cometer errores sea más fácil y rastrearlos, más difícil. Al principio de no repetir lógica se lo suele conocer como _DRY: don't repeat yourself_ (no te repitas a vos mismo/a). 
+La **repetición de lógica**, provoca que cambiar el comportamiento del sistema sea más difícil, cometer errores sea más fácil y rastrearlos, más difícil. Al principio de no repetir lógica se lo suele conocer como _DRY: don't repeat yourself_ (no te repitas a vos mismo/a).
 
 La **repetición de información** abre la puerta a la introducción de inconsistencias en los datos. Al proceso que busca reducir esta redundancia se lo suele conocer como _normalización_.
 
-Puesto en otros términos, no será suficiente con crear buenas abstracciones y usarlas de forma consistente siempre que corresponda, sino además, deberemos evitar el solapamiento entre las mismas: el conocimiento debe estar en un solo lugar. 
+Puesto en otros términos, no será suficiente con crear buenas abstracciones y usarlas de forma consistente siempre que corresponda, sino además, deberemos evitar el solapamiento entre las mismas: el conocimiento debe estar en un solo lugar.
 
 ## Mutaciones controladas
 
-Cuanto menos cambio de estado presentan mis componentes mientras el sistema se encuentra en funcionamiento, más fácil resulta razonar sobre el mismo: podemos compartir, descartar o reemplazar a los componentes más fácilmente, y en general, minimizamos la probabilidad de cometer errores. 
+Cuanto menos cambio de estado presentan mis componentes mientras el sistema se encuentra en funcionamiento, más fácil resulta razonar sobre el mismo: podemos compartir, descartar o reemplazar a los componentes más fácilmente, y en general, minimizamos la probabilidad de cometer errores.
 
-Por eso, un diseño que tiene más control sobre las mutaciones (es decir, las circunscribe y emplea solo cuando son necesarias) es mejor que aquel que no lo hace. 
+Por eso, un diseño que tiene más control sobre las mutaciones (es decir, las circunscribe y emplea solo cuando son necesarias) es mejor que aquel que no lo hace.
 
 Algunos principios derivados de esta idea general son:
-- **Favorecer la inmutabilidad:** diseñar los componentes del sistema de forma tal que sean inmutables, libres de cualquier tipo de cambio de estado interno. Si bien no es posible diseñar un sistema completamente libre de mutaciones, sí es posible y valioso diseñar partes del mismo que lo sean. 
+
+- **Favorecer la inmutabilidad:** diseñar los componentes del sistema de forma tal que sean inmutables, libres de cualquier tipo de cambio de estado interno. Si bien no es posible diseñar un sistema completamente libre de mutaciones, sí es posible y valioso diseñar partes del mismo que lo sean.
 - **Minimizar la mutabilidad:** aún si mis componentes son mutables, realizar las mutaciones solo cuando realmente es necesario, y no exponer en sus interfaces operaciones mutables que los requerimientos no justifiquen.
