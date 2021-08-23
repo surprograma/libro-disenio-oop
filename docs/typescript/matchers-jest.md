@@ -53,7 +53,7 @@ describe('Identidad VS igualdad', () => {
     */
   });
 
-  // ✔️ Passed
+  // ✅ Passed
   it('toEqual compara por igualdad', () => {
     expect(juanaAzurduy).toEqual(juanaDeArco);
   });
