@@ -11,9 +11,11 @@ export const VideoYouTube = ({ id, titulo, descripcion }) => (
         allowFullScreen
       ></iframe>
     </div>
-    <div className="card__body">
-      <h3>{titulo}</h3>
-      <p>{descripcion}</p>
-    </div>
+    {titulo && (
+      <div className="card__body">
+        <h3>{titulo}</h3>
+        <p>{descripcion}</p>
+      </div>
+    )}
   </div>
 );
