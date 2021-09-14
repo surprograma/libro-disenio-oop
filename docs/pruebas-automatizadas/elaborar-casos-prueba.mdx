@@ -74,8 +74,8 @@ Sin dudas podríamos haber elegido otros números, pero es importante que los te
 Necesitamos:
 
 - Un cliente particular.
-- Una empresa constructora con 6 albañiles.
-- Otra empresa constructora con 5 albañiles.
+- Una empresa constructora con 5 albañiles.
+- Otra empresa constructora con 4 albañiles.
 
 A los que podemos configurar diferentes grados de deuda.
 
@@ -92,7 +92,7 @@ En frameworks como [Jest](https://jestjs.io/) o [Kotest](https://kotest.io/) ten
 Podríamos también tener todo junto, sin ningún tipo de agrupamiento. Pero esto no resulta ser una buena práctica, porque
 
 - dificulta diferenciar los escenarios: estarán todas las variables de los tests mezcladas,
-- si construimos un fixture con cada uno de los tipos de cliente, estamos penalizando a cada uno de los tests por lo que necesitan los demás: ¿tiene sentido crear una constructora con 5 albañiles si estoy testeando una que tiene 6?,
+- si construimos un fixture con cada uno de los tipos de cliente, estamos penalizando a cada uno de los tests por lo que necesitan los demás: ¿tiene sentido crear una constructora con 5 albañiles si estoy testeando una que tiene 4?,
 - se pierde **cohesión**: un solo método (o función, en este caso) está cubriendo todos los casos de prueba.
 
 Volviendo al ejemplo, hay varias opciones posibles:
