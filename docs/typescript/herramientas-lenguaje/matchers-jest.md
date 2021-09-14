@@ -165,3 +165,78 @@ describe('toMatchObject en listas', () => {
   });
 });
 ```
+
+## Objetos compartidos entre tests
+
+Muchas veces es deseable compartir objetos entre distintos tests, para no repetir el código que los crea en cada uno de ellos.
+
+En Jest, cada bloque `describe` e `it` define también un _alcance_ (o _scope_), compartido por todos los tests que estén dentro. En términos prácticos, esto implica que cualquier valor definido dentro de uno de estos bloques puede ser accedido dentro de él.
+
+Veamos un ejemplo:
+
+```ts
+describe('Dirección de tránsito', () => {
+  const fechaEmision = DateTime.local(2021, 3, 8);
+  const camionetaBlanca = new Camioneta('Mercedes Sprinter 313', Color.BLANCO);
+
+  describe('emite licencias profesionales', () => {
+    const licenciaProfesional = new LicenciaProfesional(fechaEmision);
+    it('aptas para conducir una camioneta', () => {
+      // Acá se pueden usar todas las definidas en los describe.
+      expect(
+        licenciaProfesional.sirveParaConducir(camionetaBlanca)
+      ).toBeTruthy();
+    });
+
+    it('aptas para conducir un automóvil', () => {
+      // Lo mismo en este caso, sumando fititoRojo que se define directamente acá.
+      const fititoRojo = new Auto('Fiat 600', Color.ROJO);
+      expect(licenciaProfesional.sirveParaConducir(fititoRojo)).toBeTruthy();
+    });
+  });
+});
+```
+
+### Reiniciar el estado
+
+La solución que mostramos recién tiene un potencial problema: los objetos que definimos se crean **una sola vez**, y si algún test modifica su estado interno esto afectará a todos los demás. Siguiendo con el ejemplo, si un test inhabilitara una licencia por infracciones, esta quedaría inhabilitada para todos los demás.
+
+Para que esto no ocurra, Jest tiene la posibilidad de definir bloques de inicialización que se ejecutan _antes_ de cada test. En esos bloques, llamados `beforeEach` conviene inicializar todos los objetos que sabemos que pueden cambiar durante la ejecución de los tests. Podemos omitir aquellos que no vayan a cambiar, siempre y cuando tengamos la certeza de que sea así. Encontrar errores producidos por tests dependientes puede ser un gran dolor de cabeza. :cold_sweat:.
+
+```ts
+describe('Dirección de tránsito', () => {
+  // Asumimos que la fecha y la camioneta no cambian, los dejamos así.
+  const fechaEmision = DateTime.local(2021, 3, 8);
+  const camionetaBlanca = new Camioneta('Mercedes Sprinter 313', Color.BLANCO);
+
+  describe('emite licencias profesionales', () => {
+    // Como la vamos a inicializar más tarde, debemos convertirla en una variable.
+    let licenciaProfesional: Licencia;
+
+    beforeEach(() => {
+      // Acá le damos su valor inicial. Esto se ejecuta antes de cada `it`.
+      licenciaProfesional = new LicenciaProfesional(fechaEmision);
+    });
+
+    it('no aptas cuando están inhabilitadas', () => {
+      // Inhabilitar la licencia no afectará a los siguientes tests,
+      // porque el objeto se vuelve a crear cada vez.
+      licenciaProfesional.inhabilitar('Acumulación de infracciones');
+      expect(
+        licenciaProfesional.sirveParaConducir(camionetaBlanca)
+      ).toBeFalsy();
+    });
+
+    it('aptas para conducir una camioneta', () => {
+      expect(
+        licenciaProfesional.sirveParaConducir(camionetaBlanca)
+      ).toBeTruthy();
+    });
+
+    it('aptas para conducir un automóvil', () => {
+      const fititoRojo = new Auto('Fiat 600', Color.ROJO);
+      expect(licenciaProfesional.sirveParaConducir(fititoRojo)).toBeTruthy();
+    });
+  });
+});
+```
