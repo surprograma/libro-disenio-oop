@@ -2,44 +2,73 @@
 sidebar_position: 4
 ---
 
-# LocalDateTime en un minuto
+# Manejo de fechas
 
-Básicamente son clases nativas de Java 8, que sirven para representar momentos en el tiempo. Como hemos dicho en alguna otra oportunidad, en Kotlin se puede usar cualquier clase de Java, y por eso es que Kotlin no incluye una API propia para manejar fechas.
+Hasta antes de la llegada de Java 8, el manejo de fechas era bastante engorroso y muchas veces terminaba realizándose con bibliotecas externas. A partir de esa versión, se incorporan dos clases completamente nuevas, que por ser nativas terminan por reemplazar a los otras opciones existentes.
 
-Con `LocalDate` podemos representar una fecha, y con `LocalDateTime` una fecha y una hora.
+Como hemos dicho en alguna otra oportunidad, en Kotlin se puede usar cualquier clase de Java, y por eso es que Kotlin no incluye una API propia para manejar fechas.
 
-## Métodos que pueden ser de interés
+La clases en cuestión son: `LocalDate`, con la cual podemos representar una fecha, y `LocalDateTime`, con la cual podemos además establecer la hora.
 
-A continuación, un ejemplo utilizando `LocalDate`:
+## Ejemplo práctico
+
+Una pequeña muestra de qué puede hacerse con `LocalDate` y `LocalDateTime`:
+
+### Creación
 
 ```kotlin
 import java.time.LocalDate
+import java.time.LocalDateTime
 
 // Instancia de LocalDate con los valores de la fecha actual del sistema.
 val fechaActual = LocalDate.now()
 >>> 2020-08-28
 
 // Instancia de LocalDate con valores que recibe por parámetro.
-// Notar que el orden es de mayor a menor: año, mes, día
+// Notar que el orden es siempre de mayor a menor: año, mes, día.
 val renunciaDeLaRua = LocalDate.of(2001, 12, 20)
 >>> 2001-12-20
 
+// Se agregan los valores para hora, minutos y segundos (todos cero en este caso).
+val inicioAislamientoArgentina = LocalDateTime.of(2020, 3, 20, 0, 0, 0)
+>>> 2020-03-20T00:00:00
+```
+
+### Comparación con otras fechas
+
+```kotlin
 // Devuelve un booleano indicando si la fecha es posterior
 // a la que viene por parámetro.
 fechaActual.isAfter(renunciaDeLaRua)
 >>> true
 
-// Como arriba, pero al revés.
-fechaActual.isBefore(renunciaDeLaRua)
+// En este caso, como `inicioAislamientoArgentina` es LocalDateTime,
+// hay que convertirlo a LocalDate para poder compararlo.
+fechaActual.isBefore(inicioAislamientoArgentina.toLocalDate())
 >>> false
 ```
 
-Exactamente lo mismo podría hacerse con `LocalDateTime`, agregando en la creación los valores de hora, minutos y segundos:
+### Manipulación
+
+:::caution Ojo al piojo
+
+Todos estos métodos devuelven un _nuevo objeto_ que representa al resultado, y nunca cambian al original ([mutaciones controladas](/docs/cualidades-disenio/cualidades-independientes-tecnologia/#mutaciones-controladas), creo que eso lo leí en algún lado... 🤔).
+
+:::
 
 ```kotlin
-import java.time.LocalDateTime
+// Este método devuelve *una nueva fecha*, con doce días más.
+// Notar que hace lo que se espera que haga: actualiza mes y año si es necesario.
+renunciaDeLaRua.plusDays(12)
+>>> 2002-01-01
 
-val inicioAislamientoArgentina = LocalDateTime.of(2020, 3, 20, 0, 0, 0)
+// Para los LocalDateTime, también hay métodos para manipular la hora.
+inicioAislamientoArgentina.plusMinutes(20)
+>>> 2020-03-20T00:20:00
 ```
 
-Esto es bien bien básico, pero suficiente para resolver varios ejercicios de la materia. Te dejamos la documentación oficial de [`LocalDateTime`](https://docs.oracle.com/javase/8/docs/api/java/time/LocalDateTime.html) y la de [`LocalDate`](https://docs.oracle.com/javase/8/docs/api/java/time/LocalDate.html) por si querés chusmear algo más.
+## Documentación oficial
+
+Con lo de arriba debería ser suficiente para resolver varios ejercicios de nuestros cursos.
+
+Te dejamos la documentación oficial de [`LocalDateTime`](https://docs.oracle.com/javase/8/docs/api/java/time/LocalDateTime.html) y la de [`LocalDate`](https://docs.oracle.com/javase/8/docs/api/java/time/LocalDate.html) por si querés chusmear algo más.
