@@ -1,1 +1,0 @@
-"use strict";(self.webpackChunklibro_disenio_oop=self.webpackChunklibro_disenio_oop||[]).push([[3198],{1829:function(o){o.exports=JSON.parse('{"allTagsPath":"/libro-disenio-oop/blog/tags","slug":"docusaurus","name":"docusaurus","count":3,"permalink":"/libro-disenio-oop/blog/tags/docusaurus"}')}}]);

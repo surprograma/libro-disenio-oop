@@ -1,1 +1,0 @@
-"use strict";(self.webpackChunklibro_disenio_oop=self.webpackChunklibro_disenio_oop||[]).push([[2535],{6353:function(o){o.exports=JSON.parse('{"title":"Recent posts","items":[{"title":"Welcome","permalink":"/libro-disenio-oop/blog/welcome"},{"title":"Hello","permalink":"/libro-disenio-oop/blog/hello-world"},{"title":"Hola","permalink":"/libro-disenio-oop/blog/hola"}]}')}}]);
