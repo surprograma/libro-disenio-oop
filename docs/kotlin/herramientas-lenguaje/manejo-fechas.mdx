@@ -1,8 +1,14 @@
 ---
 sidebar_position: 4
+title: Manejo de fechas
+description: Cómo manipular y comparar fechas en Kotlin utilizando las clases de Java 8
 ---
 
-# Manejo de fechas
+import CodeBlock from '@theme/CodeBlock';
+
+<!-- Qué complicado sacarle un ISO string a JS 🙄 -->
+
+export const hoy = new Date().toLocaleString('sv').slice(0, 10);
 
 Hasta antes de la llegada de Java 8, el manejo de fechas era bastante engorroso y muchas veces terminaba realizándose con bibliotecas externas. A partir de esa versión, se incorporan dos clases completamente nuevas, que por ser nativas terminan por reemplazar a los otras opciones existentes.
 
@@ -16,23 +22,24 @@ Una pequeña muestra de qué puede hacerse con `LocalDate` y `LocalDateTime`:
 
 ### Creación
 
-```kotlin
-import java.time.LocalDate
+<CodeBlock className="language-kotlin">{`import java.time.LocalDate
 import java.time.LocalDateTime
-
+\ 
 // Instancia de LocalDate con los valores de la fecha actual del sistema.
 val fechaActual = LocalDate.now()
->>> 2020-08-28
-
+>>> ${hoy}
+\ 
 // Instancia de LocalDate con valores que recibe por parámetro.
 // Notar que el orden es siempre de mayor a menor: año, mes, día.
 val renunciaDeLaRua = LocalDate.of(2001, 12, 20)
 >>> 2001-12-20
-
+\ 
 // Se agregan los valores para hora, minutos y segundos (todos cero en este caso).
 val inicioAislamientoArgentina = LocalDateTime.of(2020, 3, 20, 0, 0, 0)
 >>> 2020-03-20T00:00:00
-```
+`}
+
+</CodeBlock>
 
 ### Comparación con otras fechas
 
