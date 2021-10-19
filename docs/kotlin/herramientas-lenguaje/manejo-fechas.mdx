@@ -74,8 +74,61 @@ inicioAislamientoArgentina.plusMinutes(20)
 >>> 2020-03-20T00:20:00
 ```
 
+### Transformar un string en fecha
+
+Tanto `LocalDate` como `LocalDateTime` entienden el método `parse`, que transforma un _string_ al objeto correspondiente. Obviamente, para que esto funcione el _string_ tiene que tener algún formato válido.
+
+Por defecto, se asume que el _string_ viene en [formato ISO 8601](https://es.wikipedia.org/wiki/ISO_8601), pero eso se puede configurar pasando un segundo parámetro.
+
+Veamos algunos ejemplos:
+
+```kotlin
+// Transformar una fecha en formato ISO
+LocalDate.parse("2022-08-09")
+
+// Transformar una fecha y hora en formato ISO
+LocalDateTime.parse("2022-08-09T14:19:40")
+>> 2022-08-09T14:19:40
+
+// Transformar una fecha y hora, con milisegundos, en formato ISO
+LocalDateTime.parse("2022-08-09T14:19:40.366")
+>> 2022-08-09T14:19:40.366
+
+// Transformar una fecha y hora en formato ISO con zona horaria UTC (Z)
+LocalDateTime.parse("2022-08-09T14:19:40Z", DateTimeFormatter.ISO_OFFSET_DATE_TIME)
+>> 2022-08-09T14:19:40
+
+// Transformar una fecha y hora en formato ISO con zona horaria -3
+LocalDateTime.parse("2022-08-09T14:19:40+03:00", DateTimeFormatter.ISO_OFFSET_DATE_TIME)
+>> 2022-08-09T14:19:40
+```
+
+### Mostrar una fecha como string
+
+Para el caso inverso al anterior, tanto `LocalDate` como `LocalDateTime` ofrecen un método `format`, que convierte la fecha en un _string_. En general, esto resulta útil cuando queremos mostrarle información a un usuario.
+
+Veamos algunos ejemplos:
+
+```kotlin
+// Si omitimos los segundos, los toma como 0
+val nacimientoJuana = LocalDateTime.of(1987, 3, 4, 12, 34)
+
+// Fecha y hora
+nacimientoJuana.format(DateTimeFormatter.ISO_DATE_TIME)
+"1987-03-04T12:34:00"
+
+// Solo la fecha
+nacimientoJuana.format(DateTimeFormatter.ISO_DATE)
+"1987-03-04"
+
+
+// Solo la hora
+nacimientoJuana.format(DateTimeFormatter.ISO_TIME)
+"12:34:00"
+```
+
 ## Documentación oficial
 
-Con lo de arriba debería ser suficiente para resolver varios ejercicios de nuestros cursos.
+Con lo de arriba debería ser suficiente para resolver la mayoría de los ejercicios de nuestros cursos.
 
 Te dejamos la documentación oficial de [`LocalDateTime`](https://docs.oracle.com/javase/8/docs/api/java/time/LocalDateTime.html) y la de [`LocalDate`](https://docs.oracle.com/javase/8/docs/api/java/time/LocalDate.html) por si querés chusmear algo más.
