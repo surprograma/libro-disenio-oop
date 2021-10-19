@@ -85,6 +85,7 @@ Veamos algunos ejemplos:
 ```kotlin
 // Transformar una fecha en formato ISO
 LocalDate.parse("2022-08-09")
+>> 2022-08-08
 
 // Transformar una fecha y hora en formato ISO
 LocalDateTime.parse("2022-08-09T14:19:40")
@@ -120,7 +121,6 @@ nacimientoJuana.format(DateTimeFormatter.ISO_DATE_TIME)
 // Solo la fecha
 nacimientoJuana.format(DateTimeFormatter.ISO_DATE)
 "1987-03-04"
-
 
 // Solo la hora
 nacimientoJuana.format(DateTimeFormatter.ISO_TIME)
