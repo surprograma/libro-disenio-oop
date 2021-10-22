@@ -1,7 +1,7 @@
 ---
 sidebar_position: 5
 title: Manipulación de strings
-description: Algunas técnicas útiles para quedarnos con partes de un texto.
+description: Algunas técnicas útiles para transformar porciones de texto en Kotlin.
 ---
 
 Es muy usual que en nuestros programas tengamos que manipular _strings_ o cadenas de texto: separar el nombre del apellido, quedarnos solamente con los primeros tres caracteres, quitar espacios de más, etc.
