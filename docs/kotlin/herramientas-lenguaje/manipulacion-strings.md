@@ -41,7 +41,7 @@ Todos los métodos que vienen a continuación **devuelve un nuevo _string_**. En
 | `substring(inicio, fin)`        | Devuelve un _string_ que va desde el caracter número `inicio` hasta el caracter número `fin`, contando desde 0. Si se omite el parámetro `fin`, corta desde `inicio` hasta el final del _string_. |
 | `trim()`                        | Devuelve un _string_ sin espacios de más ni al principio ni al final.                                                                                                                             |
 
-## Separar.. y volver a unir
+## Separar... y volver a unir
 
 Otra tarea que resulta habitual es la de querer separar un _string_ según un cierto caracter y también la inversa: querer unir una lista de _strings_ en un solo texto. Estas tareas en Kotlin se pueden lograr con dos métodos: `texto.split(delimitador)` y `lista.joinToString(separador)`.
 
